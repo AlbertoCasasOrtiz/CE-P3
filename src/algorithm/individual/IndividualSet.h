@@ -27,6 +27,7 @@ public:
     void sort(bool ascendent);
     void clear();
 
+    void addElement(Individual ind);
     void addElements(std::vector<Individual> set);
     void addElements(IndividualSet set);
     std::vector<Individual> getSet();
@@ -36,6 +37,7 @@ public:
     Individual getIndividual(int i);
 
     std::string toString();
+
 
 };
 

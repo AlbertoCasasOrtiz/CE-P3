@@ -5,6 +5,9 @@
 #ifndef CE_ACTIVIDAD_3_CONFIGURATION_H
 
 #include <string>
+#include "../operators/mutation/Mutation.h"
+#include "../operators/reproduction/Reproduction.h"
+#include "../operators/selectionsurvivors/SelectionSurvivors.h"
 
 #define CE_ACTIVIDAD_3_CONFIGURATION_H
 
@@ -25,14 +28,12 @@ public:
     static double pRep;
     static Mutation mutation;
     static double pMut;
-    static SurvivorsSelection survivorsSelection;
+    static SelectionSurvivors selectionSurvivors;
     static bool elitism;
     static int numElitism;
     static void loadConfiguration();
     static void parseLine(std::string line, int nLine);
 
-
-public:
 };
 
 

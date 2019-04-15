@@ -17,7 +17,7 @@ public:
     void addObserver(Observer observer);
     void removeObserver(Observer observer);
     void clear();
-    virtual void notifyObservers();
+    virtual void notifyObservers() = 0;
 };
 
 

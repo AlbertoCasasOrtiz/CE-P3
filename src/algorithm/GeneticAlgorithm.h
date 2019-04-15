@@ -4,16 +4,15 @@
 
 #ifndef CE_ACTIVIDAD_3_GENETICALGORITHM_H
     #include "individual/IndividualSet.h"
-    #include "../util/Observable.h"
+    #include "../util/observerpattern/Observable.h"
 #define CE_ACTIVIDAD_3_GENETICALGORITHM_H
 
 
 
 
-class GeneticAlgorithm: public Observable{
+class GeneticAlgorithm{
 private:
     IndividualSet population;
-    int numGenerations;
     IndividualSet elite;
     int currentGenerations;
 
@@ -22,10 +21,7 @@ public:
     void execute();
 
     void selectElite();
-    void addElite();
-
-    void showProgress();
-
+    void addEliteToPopulation();
 
 };
 
