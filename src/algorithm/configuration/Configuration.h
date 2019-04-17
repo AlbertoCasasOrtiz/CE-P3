@@ -8,6 +8,7 @@
 #include "../operators/mutation/Mutation.h"
 #include "../operators/reproduction/Reproduction.h"
 #include "../operators/selectionsurvivors/SelectionSurvivors.h"
+#include "../operators/selectionparents/SelectionParents.h"
 
 #define CE_ACTIVIDAD_3_CONFIGURATION_H
 
@@ -15,25 +16,32 @@ class Configuration {
 private:
     static std::string pathConfig;
 public:
-    static Problem problem;
+    static Problem* problem;
     static int numExecutions;
     static int populationSize;
     static int offspringSize;
     static int maxNumGenerations;
     static int maxCodonValue;
+    static int wrapping;
+    static int minInterval;
+    static int maxInterval;
+    static int samples;
+    static int function;
+    static std::vector<double> x;
     static int maxChromosomeSize;
-    static SelectionParents selectionParents;
-    static double s;
-    static Reproduction reproduction;
+    static SelectionParents* selectionParents;
+    static Reproduction* reproduction;
     static double pRep;
-    static Mutation mutation;
+    static Mutation* mutation;
     static double pMut;
-    static SelectionSurvivors selectionSurvivors;
+    static SelectionSurvivors* selectionSurvivors;
     static bool elitism;
     static int numElitism;
     static void loadConfiguration();
     static void parseLine(std::string line, int nLine);
-
+    static void generateX();
+    Configuration();
+    ~Configuration();
 };
 
 

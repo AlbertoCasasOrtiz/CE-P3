@@ -3,7 +3,3 @@
 //
 
 #include "Reproduction.h"
-
-IndividualSet Reproduction::reproduce(IndividualSet parents) {
-    return parents;
-}

@@ -10,7 +10,8 @@
 
 class SelectionSurvivors {
 public:
-    virtual IndividualSet select(IndividualSet parents, IndividualSet offspring);
+    virtual IndividualSet select(IndividualSet parents, IndividualSet offspring) = 0;
+    virtual ~SelectionSurvivors() = default;
 };
 
 

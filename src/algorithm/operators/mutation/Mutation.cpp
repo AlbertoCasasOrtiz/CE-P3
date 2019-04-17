@@ -3,7 +3,3 @@
 //
 
 #include "Mutation.h"
-
-IndividualSet Mutation::mutate(IndividualSet set) {
-    return set;
-}

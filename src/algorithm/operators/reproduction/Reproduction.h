@@ -10,7 +10,8 @@
 
 class Reproduction {
 public:
-    virtual IndividualSet reproduce(IndividualSet parents);
+    virtual IndividualSet reproduce(IndividualSet parents) = 0;
+    virtual ~Reproduction() = default;
 };
 
 
