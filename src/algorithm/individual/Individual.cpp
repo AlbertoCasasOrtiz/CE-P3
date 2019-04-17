@@ -29,9 +29,7 @@ void Individual::initialize() {
 }
 
 void Individual::evaluate() {
-    //TODO Call problem in configuration.
-    //this->fitness = Configuration::problem->evaluate(this->params);
-
+    this->fitness = Configuration::problem->evaluate(this->params);
 }
 
 std::vector<double> Individual::getFenotype() {

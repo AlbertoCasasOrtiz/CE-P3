@@ -37,7 +37,7 @@ void Configuration::parseLine(std::string line, int nLine) {
     }else if(key == "number_executions"){
         Configuration::numExecutions = ConfigurationParsers::parseInt(line);
     }else if(key == "problem"){
-        //TODO
+        //TODO Parse Problem
         Configuration::problem = value;
     }else if(key == "population_size"){
         Configuration::populationSize = ConfigurationParsers::parseInt(line);
