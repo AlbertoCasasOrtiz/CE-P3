@@ -6,8 +6,9 @@
 
 IndividualSet SelectionSurvivorsGenerational::select(IndividualSet parents, IndividualSet offspring) {
     offspring.sort(true);
-    std::vector<Individual>::iterator first = offspring.getSet().begin();
-    std::vector<Individual>::iterator last = offspring.getSet().begin()+30;
-    std::vector<Individual> newPop(first, last);
-    return newPop;
+    std::vector<Individual*>::iterator first = offspring.getSet().begin();
+    std::vector<Individual*>::iterator last = offspring.getSet().begin()+30;
+    std::vector<Individual*> newPopVector(first, last);
+    IndividualSet individualSet = IndividualSet(newPopVector);
+    return individualSet;
 }

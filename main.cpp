@@ -1,6 +1,9 @@
 #include <iostream>
+#include "src/algorithm/configuration/Configuration.h"
+#include "src/algorithm/GeneticAlgorithm.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Configuration::loadConfiguration();
+    GeneticAlgorithm algorithm = GeneticAlgorithm();
+    algorithm.execute();
 }

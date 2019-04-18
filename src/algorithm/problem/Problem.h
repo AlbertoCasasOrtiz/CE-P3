@@ -16,7 +16,6 @@ public:
     virtual bool isMaximization() = 0;
     virtual double function(std::vector<int> parameters) = 0;
     virtual std::vector<double> decode(std::vector<int> parameters) = 0;
-    virtual void parseLine(std::string sLine) = 0;
     virtual ~Problem() = default;
 };
 

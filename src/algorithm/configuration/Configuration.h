@@ -9,12 +9,11 @@
 #include "../operators/reproduction/Reproduction.h"
 #include "../operators/selectionsurvivors/SelectionSurvivors.h"
 #include "../operators/selectionparents/SelectionParents.h"
+#include "../problem/Problem.h"
 
 #define CE_ACTIVIDAD_3_CONFIGURATION_H
 
 class Configuration {
-private:
-    static std::string pathConfig;
 public:
     static Problem* problem;
     static int numExecutions;

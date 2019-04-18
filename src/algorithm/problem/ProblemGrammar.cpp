@@ -6,6 +6,9 @@
 #include "../configuration/Configuration.h"
 #include "functions/Functions.h"
 #include "functionserror/FunctionsError.h"
+#include "grammar/ValuesGrammar.h"
+#include "grammar/ExpressionGrammar.h"
+#include <limits>
 
 bool ProblemGrammar::isMaximization() {
     return false;
@@ -22,12 +25,12 @@ double ProblemGrammar::function(std::vector<int> parameters) {
 }
 
 std::vector<double> ProblemGrammar::decode(std::vector<int> parameters) {
-    //TODO NECESARIO GRAMMAR
-    return std::vector<double>();
+    ValuesGrammar val = ValuesGrammar(parameters);
+    return val.getValues();
 }
 
 std::string ProblemGrammar::getExpression(std::vector<int> parameters) {
-    //TODO NECESARIO GRAMMAR
-    return std::string();
+    ExpressionGrammar exp = ExpressionGrammar(parameters);
+    return exp.getExpression();
 }
 

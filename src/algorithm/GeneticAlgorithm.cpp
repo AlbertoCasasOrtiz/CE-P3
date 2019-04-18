@@ -4,6 +4,7 @@
 
 #include "GeneticAlgorithm.h"
 #include "configuration/Configuration.h"
+#include <algorithm>
 
 GeneticAlgorithm::GeneticAlgorithm() {
     this->population = IndividualSet();
@@ -19,11 +20,11 @@ void GeneticAlgorithm::execute() {
         this->elite.clear();
         while(this->currentGenerations < Configuration::maxNumGenerations){
             this->selectElite();
-            IndividualSet parents = Configuration::selectionParents.select(this->population);
-            IndividualSet offspring = Configuration::reproduction.reproduce(parents);
-            offspring = Configuration::mutation.mutate(offspring);
+            IndividualSet parents = Configuration::selectionParents->select(this->population);
+            IndividualSet offspring = Configuration::reproduction->reproduce(parents);
+            offspring = Configuration::mutation->mutate(offspring);
             offspring.evaluate();
-            this->population = Configuration::selectionSurvivors.select(parents, offspring);
+            this->population = Configuration::selectionSurvivors->select(parents, offspring);
 
             this->addEliteToPopulation();
             this->population.increaseAge();
@@ -34,11 +35,11 @@ void GeneticAlgorithm::execute() {
 
 void GeneticAlgorithm::selectElite() {
     if(Configuration::elitism){
-        for(Individual ind: this->population.getSet()){
+        for(Individual* ind: this->population.getSet()){
             if(this->elite.sizeOf() < Configuration::numElitism){
                 this->elite.addElement(ind);
-            } else if (this->elite.getBestIndividual().getFitness() < ind.getFitness()){
-                std::vector<Individual>::iterator it = std::find(this->elite.getSet().begin(), this->elite.getSet().end(), this->elite.getWorstIndividual());
+            } else if (this->elite.getBestIndividual()->getFitness() < ind->getFitness()){
+                auto it = std::find(this->elite.getSet().begin(), this->elite.getSet().end(), this->elite.getWorstIndividual());
                 if(it != this->elite.getSet().end()){
                     int index = std::distance(this->elite.getSet().begin(), it);
                     this->elite.getSet()[index] = ind;

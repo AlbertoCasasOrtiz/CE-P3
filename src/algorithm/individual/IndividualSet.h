@@ -11,13 +11,14 @@
 
 class IndividualSet{
 protected:
-    std::vector<Individual> set;
+    std::vector<Individual*> set;
     double averageFitness;
-    Individual bestIndividual;
-    Individual worstIndividual;
+    Individual* bestIndividual;
+    Individual* worstIndividual;
 public:
     IndividualSet();
-    IndividualSet(std::vector<Individual> set);
+    explicit IndividualSet(std::vector<Individual*> set);
+    ~IndividualSet();
 
     void initialize();
     void evaluate();
@@ -27,14 +28,14 @@ public:
     void sort(bool ascendent);
     void clear();
 
-    void addElement(Individual ind);
-    void addElements(std::vector<Individual> set);
-    void addElements(IndividualSet set);
-    std::vector<Individual> getSet();
+    void addElement(Individual* ind);
+    void addElements(std::vector<Individual*> set1);
+    void addElements(IndividualSet set1);
+    std::vector<Individual*> getSet();
     double getAverageFitness();
-    Individual getBestIndividual();
-    Individual getWorstIndividual();
-    Individual getIndividual(int i);
+    Individual* getBestIndividual();
+    Individual* getWorstIndividual();
+    Individual* getIndividual(int i);
 
     std::string toString();
 

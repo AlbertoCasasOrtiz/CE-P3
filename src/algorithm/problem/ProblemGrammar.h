@@ -4,7 +4,7 @@
 
 #ifndef CE_ACTIVIDAD_3_PROBLEMGRAMMAR_H
 #include "Problem.h"
-
+#include <string>
 #define CE_ACTIVIDAD_3_PROBLEMGRAMMAR_H
 
 

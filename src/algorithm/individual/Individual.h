@@ -4,6 +4,7 @@
 
 #ifndef CE_ACTIVIDAD_3_INDIVIDUAL_H
 #include <vector>
+#include <string>
 #define CE_ACTIVIDAD_3_INDIVIDUAL_H
 
 
@@ -35,7 +36,7 @@ public:
     double getFitness();
     void setFitness(double fitness);
 
-    Individual copy();
+    Individual* copy();
     std::string toString();
 };
 

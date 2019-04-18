@@ -7,6 +7,8 @@
 
 
 #include <vector>
+#include <cmath>
+#include <stdlib.h>
 
 class FunctionsError {
 public:
@@ -16,8 +18,9 @@ public:
             if(pow(f1[i] - f2[i], 2) <= u)
                 res += k0*abs(f1[i] - f2[i]);
             else
-                res += k1*abs(f1[i] - f2[i])
+                res += k1*abs(f1[i] - f2[i]);
         }
+        return res;
     }
 };
 

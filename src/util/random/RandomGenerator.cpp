@@ -4,6 +4,8 @@
 
 #include "RandomGenerator.h"
 
+std::random_device RandomGenerator::rd;
+
 double RandomGenerator::getDouble(double start, double end) {
     std::mt19937 mt(rd());
     std::uniform_real_distribution<double> dist(start, end);
