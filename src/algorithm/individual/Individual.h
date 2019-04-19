@@ -10,8 +10,9 @@
 
 class Individual {
 private:
-    std::vector<int> params;
+    std::vector<int>* params;
     double fitness;
+    std::string expression;
     double probability;
     double accumulatedProbability;
     int age;
@@ -20,13 +21,13 @@ public:
 
     void initialize();
     void evaluate();
-    std::vector<double> getFenotype();
+    std::vector<double>* getFenotype();
 
     int sizeOf();
 
     int getAge();
     void increaseAge();
-    std::vector<int> getParam();
+    std::vector<int>* getParam();
     void addParam(int object);
     double getProbability();
     void setProbability(double probability);
@@ -35,9 +36,10 @@ public:
     void setProbabilities(double probability, double accumulatedProbability);
     double getFitness();
     void setFitness(double fitness);
-
+    std::string getExpression();
     Individual* copy();
     std::string toString();
+
 };
 
 

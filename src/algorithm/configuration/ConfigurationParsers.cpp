@@ -9,43 +9,43 @@
 #include "../operators/selectionsurvivors/SelectionSurvivorsGenerational.h"
 #include "../problem/ProblemGrammar.h"
 
-int ConfigurationParsers::parseInt(std::string line) {
+int ConfigurationParsers::parseInt(const std::string& line) {
     return std::stoi(line);
 }
 
-double ConfigurationParsers::parseDouble(std::string line){
+double ConfigurationParsers::parseDouble(const std::string& line){
     return std::stod(line);
 }
 
-bool ConfigurationParsers::parseBoolean(std::string line) {
+bool ConfigurationParsers::parseBoolean(const std::string& line) {
     return line == "true";
 }
 
-Problem *ConfigurationParsers::parseProblem(std::string line) {
+Problem *ConfigurationParsers::parseProblem(const std::string& line) {
     if(line == "Grammar") {
         return new ProblemGrammar();
     } else return nullptr;
 }
 
-Mutation* ConfigurationParsers::parseMutation(std::string line) {
+Mutation* ConfigurationParsers::parseMutation(const std::string& line) {
     if(line == "Switch"){
         return new MutationSwitch();
     } else return nullptr;
 }
 
-Reproduction *ConfigurationParsers::parseReproduction(std::string line) {
+Reproduction *ConfigurationParsers::parseReproduction(const std::string& line) {
     if(line == "Crossover One Point"){
         return new ReproductionCrossoverOnePoint();
     } else return nullptr;
 }
 
-SelectionParents *ConfigurationParsers::parseSelectionParents(std::string line) {
+SelectionParents *ConfigurationParsers::parseSelectionParents(const std::string& line) {
     if(line == "All Parents"){
         return new SelectionParentsAllParents();
     } else return nullptr;
 }
 
-SelectionSurvivors *ConfigurationParsers::parseSelectionSurvivors(std::string line) {
+SelectionSurvivors *ConfigurationParsers::parseSelectionSurvivors(const std::string& line) {
     if(line == "Generational"){
         return new SelectionSurvivorsGenerational();
     } else return nullptr;

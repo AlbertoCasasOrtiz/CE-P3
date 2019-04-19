@@ -10,14 +10,14 @@
 
 class ValuesGrammar {
 public:
-    ChromosomeProcessor chromosomeProcessor;
-    std::vector<double> getValues();
-    ValuesGrammar(std::vector<int> chromosome);
+    ChromosomeProcessor* chromosomeProcessor;
+    std::vector<double>* getValues();
+    explicit ValuesGrammar(std::vector<int>* chromosome);
 private:
-    std::vector<double> expr();
-    std::vector<double> kg();
-    std::vector<double> kp();
-    std::vector<double> ks();
+    std::vector<double>* expr();
+    std::vector<double>* kg();
+    std::vector<double>* kp();
+    std::vector<double>* ks();
     double sign();
     double real();
     void null();

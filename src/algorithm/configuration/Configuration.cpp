@@ -20,7 +20,7 @@ int Configuration::minInterval;
 int Configuration::maxInterval;
 int Configuration::samples;
 int Configuration::function;
-std::vector<double> Configuration::x;
+std::vector<double>* Configuration::x;
 int Configuration::maxChromosomeSize;
 SelectionParents* Configuration::selectionParents;
 Reproduction* Configuration::reproduction;
@@ -33,7 +33,7 @@ int Configuration::numElitism;
 
 void Configuration::loadConfiguration() {
     char buffer[MAX_PATH];
-    GetModuleFileName( NULL, buffer, MAX_PATH );
+    GetModuleFileName( nullptr, buffer, MAX_PATH );
     std::string pathConfig = "config/config.cfg";
     std::ifstream file(pathConfig);
     std::string sline;
@@ -49,10 +49,9 @@ void Configuration::loadConfiguration() {
     }
 
     file.close();
-
 }
 
-void Configuration::parseLine(std::string line, int nLine) {
+void Configuration::parseLine(const std::string& line, int nLine) {
     std::string delimiter = ": ";
     std::string key = line.substr(0, line.find(delimiter));
     std::string value = line.substr(line.find(delimiter)+delimiter.size(), line.size());
@@ -92,38 +91,26 @@ void Configuration::parseLine(std::string line, int nLine) {
         Configuration::maxInterval = ConfigurationParsers::parseInt(value);
     }else if(key == "samples"){
         Configuration::samples = ConfigurationParsers::parseInt(value);
-    }else if(key == "function"){
+    }else if(key == "function") {
         Configuration::function = ConfigurationParsers::parseInt(value);
+    }else if(key == "num_elitism"){
+        Configuration::numElitism = ConfigurationParsers::parseInt(value);
     } else {
         std::cout << "Error in configuration file in line: " << std::to_string(nLine) << std::endl;
         std::cout << "Key: " << key << std::endl;
         std::cout << "Value: " << value << std::endl;
     }
-
-
+    Configuration::generateX();
 }
 
 void Configuration::generateX() {
+    Configuration::x = new std::vector<double>();
     double length = Configuration::maxInterval-Configuration::minInterval;
     double sampleSize = length/Configuration::samples;
     double cont = Configuration::minInterval;
     for(int i = 0; i < Configuration::samples; i++){
-        Configuration::x.push_back(cont);
+        Configuration::x->push_back(cont);
         cont += sampleSize;
     }
 }
-
-Configuration::Configuration() {
-    this->loadConfiguration();
-    this->generateX();
-}
-
-Configuration::~Configuration() {
-    delete Configuration::problem;
-    delete Configuration::selectionParents;
-    delete Configuration::reproduction;
-    delete Configuration::mutation;
-    delete Configuration::selectionSurvivors;
-}
-
 

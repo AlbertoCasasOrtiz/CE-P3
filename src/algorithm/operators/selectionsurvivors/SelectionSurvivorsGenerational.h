@@ -12,7 +12,7 @@
 
 class SelectionSurvivorsGenerational: public SelectionSurvivors{
 public:
-    IndividualSet select(IndividualSet parents, IndividualSet offspring) override;
+    IndividualSet *select(IndividualSet *parents, IndividualSet *offspring) override;
 };
 
 

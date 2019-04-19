@@ -10,13 +10,12 @@
 
 class ChromosomeProcessor {
 private:
-    std::vector<int> chromosome;
+    std::vector<int>* chromosome;
     int position;
     int consumed;
     int currentWrap;
 public:
-    ChromosomeProcessor();
-    ChromosomeProcessor(std::vector<int> array);
+    explicit ChromosomeProcessor(std::vector<int>* array);
     int getInteger();
     void consumeCodon();
     bool endByWrap();

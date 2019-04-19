@@ -26,7 +26,7 @@ public:
     static int maxInterval;
     static int samples;
     static int function;
-    static std::vector<double> x;
+    static std::vector<double>* x;
     static int maxChromosomeSize;
     static SelectionParents* selectionParents;
     static Reproduction* reproduction;
@@ -37,10 +37,8 @@ public:
     static bool elitism;
     static int numElitism;
     static void loadConfiguration();
-    static void parseLine(std::string line, int nLine);
+    static void parseLine(const std::string& line, int nLine);
     static void generateX();
-    Configuration();
-    ~Configuration();
 };
 
 

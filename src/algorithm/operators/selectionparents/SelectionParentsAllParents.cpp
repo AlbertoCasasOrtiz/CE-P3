@@ -4,6 +4,6 @@
 
 #include "SelectionParentsAllParents.h"
 
-IndividualSet SelectionParentsAllParents::select(IndividualSet parents) {
+IndividualSet *SelectionParentsAllParents::select(IndividualSet *parents) {
     return parents;
 }

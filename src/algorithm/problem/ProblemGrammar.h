@@ -11,9 +11,9 @@
 class ProblemGrammar: public Problem{
 public:
     bool isMaximization() override;
-    double function(std::vector<int> parameters) override;
-    std::vector<double> decode(std::vector<int> parameters) override;
-    std::string getExpression(std::vector<int> parameters);
+    double function(std::vector<int>* parameters) override;
+    std::vector<double>* decode(std::vector<int>* parameters) override;
+    std::string getExpression(std::vector<int>* parameters) override;
     ~ProblemGrammar() override = default;
 };
 

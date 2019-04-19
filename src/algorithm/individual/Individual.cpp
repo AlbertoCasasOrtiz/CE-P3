@@ -10,31 +10,30 @@
 
 
 Individual::Individual() {
-    this->params = std::vector<int>();
+    this->params = new std::vector<int>();
     this->fitness = 0;
     this->probability = 0;
     this->accumulatedProbability = 0;
     this->age = 0;
-    //Initialize random seed.
 }
 
 void Individual::initialize() {
     int size = RandomGenerator::getInt(1, Configuration::maxChromosomeSize);
     for(int i = 0; i < size; i++){
-        this->params.push_back(RandomGenerator::getInt(1, Configuration::maxCodonValue));
+        this->params->push_back(RandomGenerator::getInt(1, Configuration::maxCodonValue));
     }
 }
 
 void Individual::evaluate() {
     this->fitness = Configuration::problem->evaluate(this->params);
+    this->expression = Configuration::problem->getExpression(this->params);
 }
 
-std::vector<double> Individual::getFenotype() {
-    //TODO return grammar interpreted.
-    return std::vector<double>();
+std::vector<double>* Individual::getFenotype() {
+    return Configuration::problem->decode(this->params);
 }
 int Individual::sizeOf() {
-    return this->params.size();
+    return this->params->size();
 }
 
 int Individual::getAge() {
@@ -45,12 +44,12 @@ void Individual::increaseAge() {
     this->age++;
 }
 
-std::vector<int> Individual::getParam() {
+std::vector<int>* Individual::getParam() {
     return this->params;
 }
 
 void Individual::addParam(int object) {
-    this->params.push_back(object);
+    this->params->push_back(object);
 }
 
 double Individual::getProbability() {
@@ -83,33 +82,38 @@ double Individual::getFitness() {
 }
 
 Individual* Individual::copy() {
-    Individual* ind = new Individual();
+    auto* ind = new Individual();
     ind->fitness = this->fitness;
     ind->probability = this->probability;
     ind->accumulatedProbability = this->accumulatedProbability;
     ind->age = this->age;
-    for(int param : this->params){
-        ind->params.push_back(param);
+    for(int param : *this->params){
+        ind->params->push_back(param);
     }
     return ind;
 }
 
 std::string Individual::toString() {
-    std::vector<double> fenotype = this->getFenotype();
+    std::vector<double>* fenotype = this->getFenotype();
     std::ostringstream str;
     str << "Fitness: " << this->fitness << "\n";
     str << "Probability: " << this->probability << "\n";
     str << "Accum. Probability: " << this->accumulatedProbability << "\n";
     str << "Age: " << this->age << "\n";
     str << "Genotype: " << "\n";
-    for(int param : this->params){
+    for(int param : *this->params){
         str << param << " ";
     }
     str << "\n";
-    for(double param : fenotype){
+    for(double param : *fenotype){
         str << param << " ";
     }
     str << "\n";
     return std::string();
 }
+
+std::string Individual::getExpression() {
+    return Configuration::problem->getExpression(this->params);
+}
+
 

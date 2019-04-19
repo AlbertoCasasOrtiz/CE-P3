@@ -10,13 +10,13 @@
 
 class Functions {
 public:
-    static std::vector<double> executeFunction(int function);
-    static std::vector<double> function0();
-    static std::vector<double> function1();
-    static std::vector<double> function2();
-    static std::vector<double> function3();
-    static std::vector<double> function4();
-    static std::vector<double> function5();
+    static std::vector<double>* executeFunction(int function);
+    static std::vector<double>* function0();
+    static std::vector<double>* function1();
+    static std::vector<double>* function2();
+    static std::vector<double>* function3();
+    static std::vector<double>* function4();
+    static std::vector<double>* function5();
 };
 
 

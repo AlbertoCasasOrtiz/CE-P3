@@ -7,15 +7,17 @@
 
 
 #include <vector>
+#include <string>
 
 class Problem {
 public:
     int numEvaluations;
     Problem();
-    double evaluate(std::vector<int> parameters);
+    double evaluate(std::vector<int>* parameters);
     virtual bool isMaximization() = 0;
-    virtual double function(std::vector<int> parameters) = 0;
-    virtual std::vector<double> decode(std::vector<int> parameters) = 0;
+    virtual double function(std::vector<int>* parameters) = 0;
+    virtual std::vector<double>* decode(std::vector<int>* parameters) = 0;
+    virtual std::string getExpression(std::vector<int>* parameters) = 0;
     virtual ~Problem() = default;
 };
 

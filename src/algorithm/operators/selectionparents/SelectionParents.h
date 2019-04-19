@@ -10,7 +10,7 @@
 
 class SelectionParents {
 public:
-    virtual IndividualSet select(IndividualSet parents) = 0;
+    virtual IndividualSet *select(IndividualSet *parents) = 0;
     virtual ~SelectionParents() = default;
 };
 

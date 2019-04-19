@@ -10,7 +10,7 @@
 
 class MutationSwitch: public Mutation {
 public:
-    IndividualSet mutate(IndividualSet set) override;
+    IndividualSet *mutate(IndividualSet *set) override;
     void mutateIndividual(Individual* ind);
 };
 

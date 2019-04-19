@@ -8,7 +8,7 @@ Problem::Problem() {
     this->numEvaluations = 0;
 }
 
-double Problem::evaluate(std::vector<int> parameters) {
+double Problem::evaluate(std::vector<int>* parameters) {
     this->numEvaluations++;
     return isMaximization() ? function(parameters) : -function(parameters);
 }

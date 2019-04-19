@@ -11,9 +11,9 @@
 
 class ExpressionGrammar {
 public:
-    ChromosomeProcessor chromosomeProcessor;
+    ChromosomeProcessor* chromosomeProcessor;
     std::string getExpression();
-    ExpressionGrammar(std::vector<int> chromosome);
+    explicit ExpressionGrammar(std::vector<int>* chromosome);
 private:
     std::string expr();
     std::string kg();

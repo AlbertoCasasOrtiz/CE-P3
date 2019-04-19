@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // Created by alber on 18/04/2019.
 //
@@ -8,19 +10,19 @@
 #include <cmath>
 #include <limits>
 
-ValuesGrammar::ValuesGrammar(std::vector<int> chromosome) {
-    this->chromosomeProcessor = ChromosomeProcessor(chromosome);
+ValuesGrammar::ValuesGrammar(std::vector<int>* chromosome) {
+    this->chromosomeProcessor = new ChromosomeProcessor(chromosome);
 }
 
-std::vector<double> ValuesGrammar::getValues() {
-    std::vector<double> res = this->expr();
-    return this->chromosomeProcessor.endByWrap() ? std::vector<double>() : res;
+std::vector<double>* ValuesGrammar::getValues() {
+    std::vector<double>* res = this->expr();
+    return this->chromosomeProcessor->endByWrap() ? new std::vector<double>() : res;
 }
 
-std::vector<double> ValuesGrammar::expr() {
-    if(this->chromosomeProcessor.endByWrap()) return std::vector<double>();
-    this->chromosomeProcessor.consumeCodon();
-    switch (this->chromosomeProcessor.getInteger() % 6){
+std::vector<double>* ValuesGrammar::expr() {
+    if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
+    this->chromosomeProcessor->consumeCodon();
+    switch (this->chromosomeProcessor->getInteger() % 6){
         case 0:
             return VectorFunctions::mul(this->kg(), this->sign()*this->real());
         case 1:
@@ -34,50 +36,53 @@ std::vector<double> ValuesGrammar::expr() {
         case 5:
             return VectorFunctions::mul(VectorFunctions::mul(this->ks(), this->sign()*this->real()), this->expr());
         default:
-            return std::vector<double>();
+            return new std::vector<double>();
     }
 }
 
-std::vector<double> ValuesGrammar::kg() {
-    if(this->chromosomeProcessor.endByWrap()) return std::vector<double>();
-    std::vector<double> res;
-    double d1 = this->real();
-    double d2 = this->real();
-    int g = this->degree();
-    for(double x : Configuration::x){
-        res.push_back(exp(-(d1*pow(d2-x, 2))));
-    }
-    return res;
-}
-
-std::vector<double> ValuesGrammar::kp() {
-    if(this->chromosomeProcessor.endByWrap()) return std::vector<double>();
-    std::vector<double> res;
-    double d1 = this->real();
-    double d2 = this->real();
-    int g = this->degree();
-    for(double x : Configuration::x){
-        res.push_back(pow(d1*x+d2, g));
-    }
-    return res;
-}
-
-std::vector<double> ValuesGrammar::ks() {
-    if(this->chromosomeProcessor.endByWrap()) return std::vector<double>();
-    std::vector<double> res;
+std::vector<double>* ValuesGrammar::kg() {
+    if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
+    std::vector<double>* res = new std::vector<double>();
     double d1 = this->real();
     double d2 = this->real();
     this->null();
-    for(double x : Configuration::x){
-        res.push_back(tanh(d1*x+d2));
+    res->reserve(Configuration::x->size());
+    for(double x : *Configuration::x){
+        res->push_back(exp(-(d1*pow(d2-x, 2))));
+    }
+    return res;
+}
+
+std::vector<double>* ValuesGrammar::kp() {
+    if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
+    std::vector<double>* res = new std::vector<double>();
+    double d1 = this->real();
+    double d2 = this->real();
+    int g = this->degree();
+    res->reserve(Configuration::x->size());
+    for(double x : *Configuration::x){
+        res->push_back(pow(d1*x+d2, g));
+    }
+    return res;
+}
+
+std::vector<double>* ValuesGrammar::ks() {
+    if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
+    std::vector<double>* res = new std::vector<double>();
+    double d1 = this->real();
+    double d2 = this->real();
+    this->null();
+    res->reserve(Configuration::x->size());
+    for(double x : *Configuration::x){
+        res->push_back(tanh(d1*x+d2));
     }
     return res;
 }
 
 double ValuesGrammar::sign() {
-    if(this->chromosomeProcessor.endByWrap()) return std::numeric_limits<double>::min();
-    this->chromosomeProcessor.consumeCodon();
-    switch (this->chromosomeProcessor.getInteger() % 2){
+    if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<double>::min();
+    this->chromosomeProcessor->consumeCodon();
+    switch (this->chromosomeProcessor->getInteger() % 2){
         case 0:
             return 1.0;
         case 1:
@@ -88,31 +93,33 @@ double ValuesGrammar::sign() {
 }
 
 double ValuesGrammar::real() {
-    if(this->chromosomeProcessor.endByWrap()) return std::numeric_limits<double>::min();
+    if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<double>::min();
     double d = this->oneNine() + this->zeroNine()*0.1;
-    double exp = pow(1, this->sign()*this->zeroNine());
+    double exp = pow(10, this->sign()*this->zeroNine());
     return d*exp;
 }
 
 void ValuesGrammar::null() {
-    if(this->chromosomeProcessor.endByWrap()) return;
-    this->chromosomeProcessor.consumeCodon();
+    if(this->chromosomeProcessor->endByWrap()) return;
+    this->chromosomeProcessor->consumeCodon();
 }
 
 int ValuesGrammar::degree() {
-    if(this->chromosomeProcessor.endByWrap()) return std::numeric_limits<int>::min();
-    this->chromosomeProcessor.consumeCodon();
-    return this->chromosomeProcessor.getInteger() % 5;
+    if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
+    this->chromosomeProcessor->consumeCodon();
+    return this->chromosomeProcessor->getInteger() % 5;
 }
 
 int ValuesGrammar::oneNine() {
-    if(this->chromosomeProcessor.endByWrap()) return std::numeric_limits<int>::min();
-    this->chromosomeProcessor.consumeCodon();
-    return (this->chromosomeProcessor.getInteger() % 9) + 1;
+    if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
+    this->chromosomeProcessor->consumeCodon();
+    int res = (this->chromosomeProcessor->getInteger() % 9) + 1;
+    return res;
 }
 
 int ValuesGrammar::zeroNine() {
-    if(this->chromosomeProcessor.endByWrap()) return std::numeric_limits<int>::min();
-    this->chromosomeProcessor.consumeCodon();
-    return this->chromosomeProcessor.getInteger() % 10;
+    if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
+    this->chromosomeProcessor->consumeCodon();
+    int res = this->chromosomeProcessor->getInteger() % 10;
+    return res;
 }

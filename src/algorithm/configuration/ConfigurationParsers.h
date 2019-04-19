@@ -15,14 +15,14 @@
 
 class ConfigurationParsers {
 public:
-    static int parseInt(std::string line);
-    static double parseDouble(std::string line);
-    static bool parseBoolean(std::string line);
-    static Problem* parseProblem(std::string line);
-    static Mutation* parseMutation(std::string line);
-    static Reproduction* parseReproduction(std::string line);
-    static SelectionParents* parseSelectionParents(std::string line);
-    static SelectionSurvivors* parseSelectionSurvivors(std::string line);
+    static int parseInt(const std::string& line);
+    static double parseDouble(const std::string& line);
+    static bool parseBoolean(const std::string& line);
+    static Problem* parseProblem(const std::string& line);
+    static Mutation* parseMutation(const std::string& line);
+    static Reproduction* parseReproduction(const std::string& line);
+    static SelectionParents* parseSelectionParents(const std::string& line);
+    static SelectionSurvivors* parseSelectionSurvivors(const std::string& line);
 };
 
 

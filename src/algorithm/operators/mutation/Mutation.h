@@ -10,7 +10,7 @@
 
 class Mutation {
 public:
-    virtual IndividualSet mutate(IndividualSet set) = 0;
+    virtual IndividualSet *mutate(IndividualSet *set) = 0;
     virtual ~Mutation() = default;
 };
 

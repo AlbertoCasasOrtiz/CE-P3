@@ -10,7 +10,7 @@
 
 class SelectionParentsAllParents: public SelectionParents{
 public:
-    IndividualSet select(IndividualSet parents) override;
+    IndividualSet *select(IndividualSet *parents) override;
 
 };
 
