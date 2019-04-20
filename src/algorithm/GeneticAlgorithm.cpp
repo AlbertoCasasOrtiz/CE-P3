@@ -15,6 +15,8 @@ GeneticAlgorithm::GeneticAlgorithm() {
 }
 
 void GeneticAlgorithm::execute() {
+    IndividualSet *parents;
+    IndividualSet *offspring;
     this->timer->tic();
     for(int i = 0; i < Configuration::numExecutions; i++){
         this->currentGenerations = 0;
@@ -22,8 +24,6 @@ void GeneticAlgorithm::execute() {
         this->population->initialize();
         this->elite->clear();
         while(this->currentGenerations < Configuration::maxNumGenerations){
-            auto *parents = new IndividualSet();
-            auto *offspring = new IndividualSet();
             this->selectElite();
             parents = Configuration::selectionParents->select(this->population);
             offspring = Configuration::reproduction->reproduce(parents);
@@ -36,12 +36,13 @@ void GeneticAlgorithm::execute() {
             this->currentGenerations++;
             if(this->currentGenerations % 20 == 0)
                 std::cout << this->currentGenerations << std::endl;
-            /*if(this->currentGenerations % 100 == 0)
-                std::cout << this->population->getBestIndividual()->toString() << std::endl;*/
+            delete parents;
+            delete offspring;
         }
         this->timer->tac();
         std::cout << "Time: " << this->timer->getTime() << std::endl;
         std::cout << this->population->getBestIndividual()->toString() << std::endl;
+        delete this->population;
     }
 }
 

@@ -40,8 +40,6 @@ public:
     Individual* getWorstIndividual();
     Individual* getIndividual(int i);
 
-    std::string toString();
-
 };
 
 

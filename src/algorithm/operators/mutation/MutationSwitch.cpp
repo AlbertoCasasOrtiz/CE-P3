@@ -16,9 +16,9 @@ IndividualSet *MutationSwitch::mutate(IndividualSet *set) {
 }
 
 void MutationSwitch::mutateIndividual(Individual* ind) {
-    for(int i = 0; i < ind->getParam()->size(); i++){
+    for(int & pos : *ind->getParam()){
         if(Configuration::pMut >=  RandomGenerator::getDouble(0, 1.0)){
-            (*ind->getParam())[i] =  RandomGenerator::getInt(0, Configuration::maxCodonValue);
+            pos =  RandomGenerator::getInt(0, Configuration::maxCodonValue);
         }
     }
 }

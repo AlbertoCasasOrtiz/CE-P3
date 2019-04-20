@@ -35,9 +35,9 @@ IndividualSet::IndividualSet() {
 }
 
 IndividualSet::~IndividualSet() {
+    for(auto & ind : *this->set)
+        delete ind;
     delete this->set;
-    delete this->bestIndividual;
-    delete this->worstIndividual;
 }
 
 IndividualSet::IndividualSet(std::vector<Individual*>* set) {
@@ -120,11 +120,6 @@ Individual* IndividualSet::getWorstIndividual() {
 
 Individual* IndividualSet::getIndividual(int i) {
     return this->set->at(i);
-}
-
-std::string IndividualSet::toString() {
-    //TODO TOSTRING
-    return std::string();
 }
 
 void IndividualSet::consistency() {

@@ -7,7 +7,6 @@
 #include "../../../util/random/RandomGenerator.h"
 
 IndividualSet *ReproductionCrossoverOnePoint::reproduce(IndividualSet *parents) {
-
     auto *offspring = new IndividualSet();
     while(offspring->sizeOf() < Configuration::offspringSize){
         int pos1 = RandomGenerator::getInt(0, parents->sizeOf());
