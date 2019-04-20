@@ -18,6 +18,7 @@ private:
     int age;
 public:
     Individual();
+    ~Individual();
 
     void initialize();
     void evaluate();

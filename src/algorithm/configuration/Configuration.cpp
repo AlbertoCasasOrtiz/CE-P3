@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <afxres.h>
+#include <windows.h>
 
 Problem* Configuration::problem;
 int Configuration::numExecutions;

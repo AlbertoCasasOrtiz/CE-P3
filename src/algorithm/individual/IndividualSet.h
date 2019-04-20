@@ -23,6 +23,7 @@ public:
     void initialize();
     void evaluate();
     void increaseAge();
+    void consistency();
 
     int sizeOf();
     void sort(bool ascendent);

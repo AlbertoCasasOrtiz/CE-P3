@@ -14,6 +14,7 @@ public:
     ChromosomeProcessor* chromosomeProcessor;
     std::string getExpression();
     explicit ExpressionGrammar(std::vector<int>* chromosome);
+    ~ExpressionGrammar();
 private:
     std::string expr();
     std::string kg();

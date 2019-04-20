@@ -48,8 +48,9 @@ IndividualSet::IndividualSet(std::vector<Individual*>* set) {
 }
 
 void IndividualSet::initialize() {
+    Individual* ind;
     for(int i = 0; i < Configuration::populationSize; i++){
-        auto* ind = new Individual();
+        ind = new Individual();
         ind->initialize();
         this->set->push_back(ind);
     }
@@ -124,4 +125,18 @@ Individual* IndividualSet::getIndividual(int i) {
 std::string IndividualSet::toString() {
     //TODO TOSTRING
     return std::string();
+}
+
+void IndividualSet::consistency() {
+    double bestFitness = std::numeric_limits<double>::lowest();
+    double worstFitness = std::numeric_limits<double>::infinity();
+    this->averageFitness = 0.0;
+    for(Individual* ind: *this->set){
+        this->averageFitness += ind->getFitness();
+        this->bestIndividual = ind->getFitness() >= bestFitness ? ind : this->bestIndividual;
+        bestFitness = bestIndividual->getFitness();
+        this->worstIndividual = ind->getFitness() <= worstFitness ? ind : this->worstIndividual;
+        worstFitness = worstIndividual->getFitness();
+    }
+    this->averageFitness /= this->set->size();
 }

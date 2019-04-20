@@ -91,3 +91,7 @@ std::string ExpressionGrammar::zeroNine() {
     this->chromosomeProcessor->consumeCodon();
     return std::to_string(this->chromosomeProcessor->getInteger() % 10);
 }
+
+ExpressionGrammar::~ExpressionGrammar() {
+    delete this->chromosomeProcessor;
+}

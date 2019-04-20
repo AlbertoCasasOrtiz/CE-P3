@@ -9,6 +9,7 @@
 #include "grammar/ValuesGrammar.h"
 #include "grammar/ExpressionGrammar.h"
 #include <limits>
+#include <iostream>
 
 bool ProblemGrammar::isMaximization() {
     return false;
@@ -23,12 +24,12 @@ double ProblemGrammar::function(std::vector<int>* parameters) {
 }
 
 std::vector<double>* ProblemGrammar::decode(std::vector<int>* parameters) {
-    ValuesGrammar val = ValuesGrammar(parameters);
-    return val.getValues();
+    auto *val = new ValuesGrammar(parameters);
+    return val->getValues();
 }
 
 std::string ProblemGrammar::getExpression(std::vector<int>* parameters) {
-    ExpressionGrammar exp = ExpressionGrammar(parameters);
-    return exp.getExpression();
+    auto* exp = new ExpressionGrammar(parameters);
+    return exp->getExpression();
 }
 

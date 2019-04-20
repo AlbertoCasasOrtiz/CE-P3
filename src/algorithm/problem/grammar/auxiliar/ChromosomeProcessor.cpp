@@ -32,3 +32,8 @@ bool ChromosomeProcessor::endByWrap() {
     return this->currentWrap == Configuration::wrapping;
 }
 
+ChromosomeProcessor::~ChromosomeProcessor() {
+    delete(chromosome);
+}
+
+

@@ -22,9 +22,11 @@ void GeneticAlgorithm::execute() {
         this->population->initialize();
         this->elite->clear();
         while(this->currentGenerations < Configuration::maxNumGenerations){
+            auto *parents = new IndividualSet();
+            auto *offspring = new IndividualSet();
             this->selectElite();
-            IndividualSet *parents = Configuration::selectionParents->select(this->population);
-            IndividualSet *offspring = Configuration::reproduction->reproduce(parents);
+            parents = Configuration::selectionParents->select(this->population);
+            offspring = Configuration::reproduction->reproduce(parents);
             offspring = Configuration::mutation->mutate(offspring);
             offspring->evaluate();
             this->population = Configuration::selectionSurvivors->select(parents, offspring);
@@ -32,8 +34,10 @@ void GeneticAlgorithm::execute() {
             this->addEliteToPopulation();
             this->population->increaseAge();
             this->currentGenerations++;
-            if(this->currentGenerations % 100 == 0)
+            if(this->currentGenerations % 20 == 0)
                 std::cout << this->currentGenerations << std::endl;
+            /*if(this->currentGenerations % 100 == 0)
+                std::cout << this->population->getBestIndividual()->toString() << std::endl;*/
         }
         this->timer->tac();
         std::cout << "Time: " << this->timer->getTime() << std::endl;
@@ -71,9 +75,16 @@ void GeneticAlgorithm::addEliteToPopulation() {
             if(it != this->population->getSet()->end()){
                 int index = std::distance(this->population->getSet()->begin(), it);
                 (*this->population->getSet())[index] = this->elite->getIndividual(i);
+                this->population->consistency();
             } else {
                 //TODO ERROR INDIVIDUAL NOT FOUND
             }
         }
     }
+}
+
+GeneticAlgorithm::~GeneticAlgorithm() {
+    delete this->population;
+    delete this->elite;
+    delete this->timer;
 }

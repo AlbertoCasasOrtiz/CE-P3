@@ -19,6 +19,7 @@ public:
     int getInteger();
     void consumeCodon();
     bool endByWrap();
+    ~ChromosomeProcessor();
 };
 
 

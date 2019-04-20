@@ -13,6 +13,7 @@ public:
     ChromosomeProcessor* chromosomeProcessor;
     std::vector<double>* getValues();
     explicit ValuesGrammar(std::vector<int>* chromosome);
+    ~ValuesGrammar();
 private:
     std::vector<double>* expr();
     std::vector<double>* kg();

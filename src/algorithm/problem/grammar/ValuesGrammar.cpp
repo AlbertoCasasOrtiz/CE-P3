@@ -9,14 +9,23 @@
 #include "auxiliar/VectorFunctions.h"
 #include <cmath>
 #include <limits>
+#include <iostream>
 
 ValuesGrammar::ValuesGrammar(std::vector<int>* chromosome) {
     this->chromosomeProcessor = new ChromosomeProcessor(chromosome);
 }
 
-std::vector<double>* ValuesGrammar::getValues() {
-    std::vector<double>* res = this->expr();
-    return this->chromosomeProcessor->endByWrap() ? new std::vector<double>() : res;
+std::vector<double>* ValuesGrammar::getValues()
+{
+    std::vector<double>* res;
+    res = this->expr();
+    if(this->chromosomeProcessor->endByWrap()){
+        delete res;
+        return new std::vector<double>();
+    } else{
+        return res;
+    }
+
 }
 
 std::vector<double>* ValuesGrammar::expr() {
@@ -38,15 +47,15 @@ std::vector<double>* ValuesGrammar::expr() {
         default:
             return new std::vector<double>();
     }
+
 }
 
 std::vector<double>* ValuesGrammar::kg() {
     if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
-    std::vector<double>* res = new std::vector<double>();
+    auto* res = new std::vector<double>();
     double d1 = this->real();
     double d2 = this->real();
     this->null();
-    res->reserve(Configuration::x->size());
     for(double x : *Configuration::x){
         res->push_back(exp(-(d1*pow(d2-x, 2))));
     }
@@ -55,11 +64,10 @@ std::vector<double>* ValuesGrammar::kg() {
 
 std::vector<double>* ValuesGrammar::kp() {
     if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
-    std::vector<double>* res = new std::vector<double>();
+    auto* res = new std::vector<double>();
     double d1 = this->real();
     double d2 = this->real();
     int g = this->degree();
-    res->reserve(Configuration::x->size());
     for(double x : *Configuration::x){
         res->push_back(pow(d1*x+d2, g));
     }
@@ -68,11 +76,10 @@ std::vector<double>* ValuesGrammar::kp() {
 
 std::vector<double>* ValuesGrammar::ks() {
     if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
-    std::vector<double>* res = new std::vector<double>();
+    auto* res = new std::vector<double>();
     double d1 = this->real();
     double d2 = this->real();
     this->null();
-    res->reserve(Configuration::x->size());
     for(double x : *Configuration::x){
         res->push_back(tanh(d1*x+d2));
     }
@@ -122,4 +129,8 @@ int ValuesGrammar::zeroNine() {
     this->chromosomeProcessor->consumeCodon();
     int res = this->chromosomeProcessor->getInteger() % 10;
     return res;
+}
+
+ValuesGrammar::~ValuesGrammar() {
+    delete this->chromosomeProcessor;
 }

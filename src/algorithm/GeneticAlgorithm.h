@@ -4,7 +4,6 @@
 
 #ifndef CE_ACTIVIDAD_3_GENETICALGORITHM_H
     #include "individual/IndividualSet.h"
-    #include "../util/observerpattern/Observable.h"
 #include "../util/timer/Timer.h"
 
 #define CE_ACTIVIDAD_3_GENETICALGORITHM_H
@@ -20,6 +19,7 @@ private:
     Timer* timer;
 public:
     GeneticAlgorithm();
+    ~GeneticAlgorithm();
     void execute();
 
     void selectElite();

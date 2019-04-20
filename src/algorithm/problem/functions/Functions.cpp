@@ -26,7 +26,7 @@ std::vector<double>* Functions::executeFunction(int function){
 }
 
 std::vector<double>* Functions::function0() {
-    std::vector<double>* f = new std::vector<double>();
+    auto* f = new std::vector<double>();
     for(double x : *Configuration::x){
         double res = 8*exp(-2*pow(x-2, 2));
         res += (2*x+1);
@@ -37,7 +37,7 @@ std::vector<double>* Functions::function0() {
 }
 
 std::vector<double>* Functions::function1() {
-    std::vector<double>* f = new std::vector<double>();
+    auto* f = new std::vector<double>();
     for(double x : *Configuration::x){
         double res = 2*exp(-2*pow(x-1, 2));
         res -= exp(pow(x-1, 2));
@@ -47,7 +47,7 @@ std::vector<double>* Functions::function1() {
 }
 
 std::vector<double>* Functions::function2() {
-    std::vector<double>* f = new std::vector<double>();
+    auto* f = new std::vector<double>();
     for(double x : *Configuration::x){
         double res = sqrt(x);
         f->push_back(res);
@@ -56,7 +56,7 @@ std::vector<double>* Functions::function2() {
 }
 
 std::vector<double>* Functions::function3() {
-    std::vector<double>* f = new std::vector<double>();
+    auto* f = new std::vector<double>();
     for(double x : *Configuration::x){
         double res = exp(-x)*sin(2*x);
         f->push_back(res);
@@ -65,7 +65,7 @@ std::vector<double>* Functions::function3() {
 }
 
 std::vector<double>* Functions::function4() {
-    std::vector<double>* f = new std::vector<double>();
+    auto* f = new std::vector<double>();
     for(double x : *Configuration::x){
         double res = log(log(x));
         f->push_back(res);
@@ -74,7 +74,7 @@ std::vector<double>* Functions::function4() {
 }
 
 std::vector<double>* Functions::function5() {
-    std::vector<double>* f = new std::vector<double>();
+    auto* f = new std::vector<double>();
     for(double x : *Configuration::x){
         double res = 6*exp(-2*x);
         res+=2*sin(x);

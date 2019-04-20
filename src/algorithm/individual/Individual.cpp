@@ -7,6 +7,7 @@
 #include "../../util/random/RandomGenerator.h"
 #include <random>
 #include <sstream>
+#include <iostream>
 
 
 Individual::Individual() {
@@ -16,6 +17,12 @@ Individual::Individual() {
     this->accumulatedProbability = 0;
     this->age = 0;
 }
+
+Individual::~Individual() {
+    delete this->params;
+}
+
+
 
 void Individual::initialize() {
     int size = RandomGenerator::getInt(1, Configuration::maxChromosomeSize);
@@ -32,6 +39,7 @@ void Individual::evaluate() {
 std::vector<double>* Individual::getFenotype() {
     return Configuration::problem->decode(this->params);
 }
+
 int Individual::sizeOf() {
     return this->params->size();
 }
@@ -100,20 +108,24 @@ std::string Individual::toString() {
     str << "Probability: " << this->probability << "\n";
     str << "Accum. Probability: " << this->accumulatedProbability << "\n";
     str << "Age: " << this->age << "\n";
+    str << "Expression: " << this->getExpression() << std::endl;
     str << "Genotype: " << "\n";
     for(int param : *this->params){
         str << param << " ";
     }
     str << "\n";
+    str << "Fenotype: " << "\n";
     for(double param : *fenotype){
         str << param << " ";
     }
     str << "\n";
-    return std::string();
+    str << "x: " << "\n";
+    for(double xi : *Configuration::x){
+        str << xi << " ";
+    }
+    return str.str();
 }
 
 std::string Individual::getExpression() {
     return Configuration::problem->getExpression(this->params);
 }
-
-

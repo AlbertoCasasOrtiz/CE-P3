@@ -2,6 +2,7 @@
 // Created by alber on 17/04/2019.
 //
 
+#include <iostream>
 #include "Problem.h"
 
 Problem::Problem() {
@@ -11,5 +12,6 @@ Problem::Problem() {
 double Problem::evaluate(std::vector<int>* parameters) {
     this->numEvaluations++;
     return isMaximization() ? function(parameters) : -function(parameters);
+
 }
 
