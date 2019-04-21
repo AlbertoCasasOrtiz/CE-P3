@@ -22,7 +22,7 @@ public:
     ~GeneticAlgorithm();
     void execute();
 
-    void selectElite();
+    IndividualSet* selectElite();
     void addEliteToPopulation();
 
 };

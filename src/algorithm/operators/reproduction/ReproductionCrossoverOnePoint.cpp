@@ -13,7 +13,9 @@ IndividualSet *ReproductionCrossoverOnePoint::reproduce(IndividualSet *parents) 
         int pos2 = RandomGenerator::getInt(0, parents->sizeOf());
         if(Configuration::pRep >= RandomGenerator::getDouble(0.0, 1.0)){
             IndividualSet *generated = this->crossover(parents->getIndividual(pos1)->copy(), parents->getIndividual(pos2)->copy());
-            offspring->addElements(generated);
+            offspring->addElement(generated->getSet()->at(0)->copy());
+            offspring->addElement(generated->getSet()->at(1)->copy());
+            delete generated;
         } else {
             offspring->addElement(parents->getIndividual(pos1)->copy());
             offspring->addElement(parents->getIndividual(pos2)->copy());

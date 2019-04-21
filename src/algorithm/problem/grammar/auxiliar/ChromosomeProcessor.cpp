@@ -33,7 +33,7 @@ bool ChromosomeProcessor::endByWrap() {
 }
 
 ChromosomeProcessor::~ChromosomeProcessor() {
-    delete(chromosome);
+    delete chromosome;
 }
 
 

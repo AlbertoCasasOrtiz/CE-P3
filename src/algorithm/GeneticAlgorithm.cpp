@@ -24,20 +24,23 @@ void GeneticAlgorithm::execute() {
         this->population->initialize();
         this->elite->clear();
         while(this->currentGenerations < Configuration::maxNumGenerations){
+            delete this->elite;
+            this->elite = this->selectElite();
             this->selectElite();
             parents = Configuration::selectionParents->select(this->population);
             offspring = Configuration::reproduction->reproduce(parents);
-            offspring = Configuration::mutation->mutate(offspring);
+            Configuration::mutation->mutate(offspring);
             offspring->evaluate();
+            delete this->population;
             this->population = Configuration::selectionSurvivors->select(parents, offspring);
+            delete parents;
+            delete offspring;
             this->population->evaluate();
             this->addEliteToPopulation();
             this->population->increaseAge();
             this->currentGenerations++;
             if(this->currentGenerations % 20 == 0)
                 std::cout << this->currentGenerations << std::endl;
-            delete parents;
-            delete offspring;
         }
         this->timer->tac();
         std::cout << "Time: " << this->timer->getTime() << std::endl;
@@ -46,20 +49,21 @@ void GeneticAlgorithm::execute() {
     }
 }
 
-void GeneticAlgorithm::selectElite() {
+IndividualSet* GeneticAlgorithm::selectElite() {
+    auto* newElite = new IndividualSet();
     if(Configuration::elitism){
         for(Individual* ind: *this->population->getSet()){
-            if(this->elite->sizeOf() < Configuration::numElitism){
-                this->elite->addElement(ind);
+            if(newElite->sizeOf() < Configuration::numElitism){
+                newElite->addElement(ind->copy());
                 //Keep consistency of elite set.
-                this->elite->evaluate();
-            } else if (this->elite->getBestIndividual()->getFitness() < ind->getFitness()){
-                auto it = std::find(this->elite->getSet()->begin(), this->elite->getSet()->end(), this->elite->getWorstIndividual());
-                if(it != this->elite->getSet()->end()){
-                    int index = std::distance(this->elite->getSet()->begin(), it);
-                    (*this->elite->getSet())[index] = ind;
+                newElite->evaluate();
+            } else if (newElite->getBestIndividual()->getFitness() < ind->getFitness()){
+                auto it = std::find(newElite->getSet()->begin(), newElite->getSet()->end(), newElite->getWorstIndividual());
+                if(it != newElite->getSet()->end()){
+                    int index = std::distance(newElite->getSet()->begin(), it);
+                    (*newElite->getSet())[index] = ind->copy();
                     //Keep consistency of elite set.
-                    this->elite->evaluate();
+                    newElite->evaluate();
                 } else {
                     //TODO ERROR INDIVIDUAL NOT FOUND
                     std::cout << "Error: Individual not found." << std::endl;
@@ -67,6 +71,7 @@ void GeneticAlgorithm::selectElite() {
             }
         }
     }
+    return newElite;
 }
 
 void GeneticAlgorithm::addEliteToPopulation() {
@@ -75,7 +80,7 @@ void GeneticAlgorithm::addEliteToPopulation() {
             auto it = std::find(this->population->getSet()->begin(), this->population->getSet()->end(), this->population->getWorstIndividual());
             if(it != this->population->getSet()->end()){
                 int index = std::distance(this->population->getSet()->begin(), it);
-                (*this->population->getSet())[index] = this->elite->getIndividual(i);
+                (*this->population->getSet())[index] = this->elite->getIndividual(i)->copy();
                 this->population->consistency();
             } else {
                 //TODO ERROR INDIVIDUAL NOT FOUND

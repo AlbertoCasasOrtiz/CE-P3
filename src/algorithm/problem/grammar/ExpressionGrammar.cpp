@@ -12,6 +12,11 @@ ExpressionGrammar::ExpressionGrammar(std::vector<int>* chromosome) {
 
 std::string ExpressionGrammar::getExpression() {
     std::string str = this->expr();
+    if(this->chromosomeProcessor->endByWrap()) {
+        return "";
+    }else{
+        return str;
+    }
     return this->chromosomeProcessor->endByWrap() ? "" : str;
 }
 
