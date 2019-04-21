@@ -11,7 +11,7 @@
 
 class RandomGenerator {
 private:
-    static std::random_device rd;
+    static std::mt19937 mt;
 public:
     double static getDouble(double start, double end);
     int static getInt(int start, int end);
