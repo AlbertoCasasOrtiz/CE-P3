@@ -12,6 +12,7 @@ GeneticAlgorithm::GeneticAlgorithm() {
     this->currentGenerations = 0;
     this->elite = new IndividualSet();
     this->timer = new Timer();
+    this->dataSet = new DataSet();
 }
 
 void GeneticAlgorithm::execute() {
@@ -45,8 +46,19 @@ void GeneticAlgorithm::execute() {
         this->timer->tac();
         std::cout << "Time: " << this->timer->getTime() << std::endl;
         std::cout << this->population->getBestIndividual()->toString() << std::endl;
-        delete this->population;
+
+        Data* data = new Data();
+        data->setPopulation(this->population->clone());
+        data->setGenerations(this->currentGenerations);
+        data->setTime(this->timer->getTime());
+        //TODO NUMBER OF EVALUATIONS.
+        //data->setEvaluations()
+        //TODO NUMBER OF HITS
+        //data->setHits()
+        dataSet->addData(data);
     }
+    //TODO OUT DATASET
+    delete this->dataSet;
 }
 
 IndividualSet* GeneticAlgorithm::selectElite() {
@@ -93,4 +105,5 @@ GeneticAlgorithm::~GeneticAlgorithm() {
     delete this->population;
     delete this->elite;
     delete this->timer;
+    delete this->dataSet;
 }

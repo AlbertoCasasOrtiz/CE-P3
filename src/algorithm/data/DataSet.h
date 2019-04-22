@@ -7,30 +7,23 @@
 #include <vector>
 #include "../individual/Individual.h"
 #include "../individual/IndividualSet.h"
+#include "Data.h"
 
 #define CE_ACTIVIDAD_3_DATASET_H
 
 
 class DataSet {
 private:
-    std::vector<int>* times;
-    std::vector<int>* generations;
-    std::vector<int>* evaluations;
-    std::vector<int>* hits;
-    std::vector<IndividualSet*>* populations;
+    std::vector<Data*>* dataSet;
 public:
     DataSet();
     ~DataSet();
-    void addTime(int time);
-    void addPopulation(IndividualSet* population);
-    int getTime(int i);
-    IndividualSet* getPopulation(int i);
-    std::vector<IndividualSet*>* getPopulations();
-    int getAverageTimeSeconds();
-    double getAverageFitness();
-    Individual* getBestIndividual();
-    Individual* getWorstIndividual();
 
+    void setDataSet(std::vector<Data*>* vector);
+    std::vector<Data*>* getDataSet();
+
+    void addData(Data* data);
+    Data* getData(int data);
 
 };
 

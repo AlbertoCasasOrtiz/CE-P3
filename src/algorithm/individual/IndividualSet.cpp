@@ -135,3 +135,14 @@ void IndividualSet::consistency() {
     }
     this->averageFitness /= this->set->size();
 }
+
+IndividualSet *IndividualSet::clone() {
+    auto* individualSet = new IndividualSet();
+    for(int i = 0; i < this->sizeOf(); i++){
+        individualSet->set->push_back(this->set->at(i)->copy());
+    }
+    //Best individual, worst individual and average fitness are declared
+    //in the function consistency using data from the set.
+    individualSet->consistency();
+    return individualSet;
+}

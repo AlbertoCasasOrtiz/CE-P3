@@ -24,6 +24,7 @@ public:
     void evaluate();
     void increaseAge();
     void consistency();
+    IndividualSet* clone();
 
     int sizeOf();
     void sort(bool ascendent);

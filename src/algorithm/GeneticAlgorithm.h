@@ -5,6 +5,7 @@
 #ifndef CE_ACTIVIDAD_3_GENETICALGORITHM_H
     #include "individual/IndividualSet.h"
 #include "../util/timer/Timer.h"
+#include "data/DataSet.h"
 
 #define CE_ACTIVIDAD_3_GENETICALGORITHM_H
 
@@ -17,6 +18,7 @@ private:
     IndividualSet *elite;
     int currentGenerations;
     Timer* timer;
+    DataSet* dataSet;
 public:
     GeneticAlgorithm();
     ~GeneticAlgorithm();
