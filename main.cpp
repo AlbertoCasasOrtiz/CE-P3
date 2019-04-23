@@ -4,6 +4,14 @@
 
 int main() {
     Configuration::loadConfiguration();
-    GeneticAlgorithm algorithm = GeneticAlgorithm();
-    algorithm.execute();
+    auto* algorithm = new GeneticAlgorithm();
+    algorithm->execute();
+
+    delete algorithm;
+    delete Configuration::x;
+    delete Configuration::problem;
+    delete Configuration::selectionParents;
+    delete Configuration::reproduction;
+    delete Configuration::mutation;
+    delete Configuration::selectionSurvivors;
 }

@@ -39,6 +39,7 @@ public:
     static void loadConfiguration();
     static void parseLine(const std::string& line, int nLine);
     static void generateX();
+    ~Configuration();
 };
 
 

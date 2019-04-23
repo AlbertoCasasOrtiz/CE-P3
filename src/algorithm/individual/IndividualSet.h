@@ -21,7 +21,7 @@ public:
     ~IndividualSet();
 
     void initialize();
-    void evaluate();
+    void evaluate(bool count);
     void increaseAge();
     void consistency();
     IndividualSet* clone();

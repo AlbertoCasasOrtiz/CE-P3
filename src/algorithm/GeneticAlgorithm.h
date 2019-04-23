@@ -16,10 +16,11 @@ class GeneticAlgorithm{
 private:
     IndividualSet *population;
     IndividualSet *elite;
-    int currentGenerations;
+    static int currentGenerations;
     Timer* timer;
     DataSet* dataSet;
 public:
+    static int evaluations;
     GeneticAlgorithm();
     ~GeneticAlgorithm();
     void execute();

@@ -6,6 +6,7 @@
 
 #include "IndividualSet.h"
 #include "../configuration/Configuration.h"
+#include "../GeneticAlgorithm.h"
 #include <limits>
 #include <iostream>
 #include <algorithm>
@@ -54,15 +55,17 @@ void IndividualSet::initialize() {
         ind->initialize();
         this->set->push_back(ind);
     }
-    this->evaluate();
+    this->evaluate(true);
 }
 
-void IndividualSet::evaluate() {
+void IndividualSet::evaluate(bool count) {
     double bestFitness = std::numeric_limits<double>::lowest();
     double worstFitness = std::numeric_limits<double>::infinity();
     this->averageFitness = 0.0;
     for(Individual* ind: *this->set){
         ind->evaluate();
+        if(count)
+            GeneticAlgorithm::evaluations++;
         this->averageFitness += ind->getFitness();
         this->bestIndividual = ind->getFitness() >= bestFitness ? ind : this->bestIndividual;
         bestFitness = bestIndividual->getFitness();

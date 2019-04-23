@@ -32,6 +32,8 @@ public:
     int getGenerations();
     int getEvaluations();
     int getHits();
+
+    std::string toString();
 };
 
 

@@ -57,6 +57,16 @@ int Data::getHits() {
     return this->hits;
 }
 
+std::string Data::toString() {
+    std::string str;
+    str += this->population->getBestIndividual()->toString() + "\n\n";
+    str += "Time: " + std::to_string(this->getTime()/60) + "\n";
+    str += "Evaluations: " + std::to_string(this->getEvaluations()) + "\n";
+    str += "Best Fitness: " + std::to_string(this->population->getBestIndividual()->getFitness()) + "\n";
+    str += "Worst Fitness: " + std::to_string(this->population->getWorstIndividual()->getFitness()) + "\n";
+    return str;
+}
+
 
 
 

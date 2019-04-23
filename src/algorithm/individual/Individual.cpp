@@ -5,6 +5,7 @@
 #include "Individual.h"
 #include "../configuration/Configuration.h"
 #include "../../util/random/RandomGenerator.h"
+#include "../problem/functions/Functions.h"
 #include <random>
 #include <sstream>
 #include <iostream>
@@ -114,14 +115,14 @@ std::string Individual::toString() {
         str << param << " ";
     }
     str << "\n";
-    str << "Fenotype: " << "\n";
+    str << "Result: " << "\n";
     for(double param : *fenotype){
-        str << param << " ";
+        str << param << "\n";
     }
     str << "\n";
-    str << "x: " << "\n";
-    for(double xi : *Configuration::x){
-        str << xi << " ";
+    str << "Expected: " << "\n";
+    for(double xi : *Functions::executeFunction(Configuration::function)){
+        str << xi << "\n";
     }
     return str.str();
 }

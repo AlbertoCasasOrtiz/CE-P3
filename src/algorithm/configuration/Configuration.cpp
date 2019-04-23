@@ -45,9 +45,10 @@ void Configuration::loadConfiguration() {
             line++;
         }
     } else {
-        std::cout << "There was an error reading configuration file." << std::endl;
+        std::cerr << "There was an error reading configuration file." << std::endl;
     }
 
+    Configuration::generateX();
     file.close();
 }
 
@@ -100,7 +101,6 @@ void Configuration::parseLine(const std::string& line, int nLine) {
         std::cout << "Key: " << key << std::endl;
         std::cout << "Value: " << value << std::endl;
     }
-    Configuration::generateX();
 }
 
 void Configuration::generateX() {
@@ -112,5 +112,14 @@ void Configuration::generateX() {
         Configuration::x->push_back(cont);
         cont += sampleSize;
     }
+}
+
+Configuration::~Configuration() {
+    delete Configuration::x;
+    delete Configuration::problem;
+    delete Configuration::selectionParents;
+    delete Configuration::reproduction;
+    delete Configuration::mutation;
+    delete Configuration::selectionSurvivors;
 }
 
