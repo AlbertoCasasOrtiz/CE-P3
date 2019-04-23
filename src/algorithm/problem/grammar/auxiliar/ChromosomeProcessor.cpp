@@ -29,7 +29,7 @@ void ChromosomeProcessor::consumeCodon() {
 }
 
 bool ChromosomeProcessor::endByWrap() {
-    return this->currentWrap == Configuration::wrapping;
+    return this->currentWrap > Configuration::wrapping;
 }
 
 ChromosomeProcessor::~ChromosomeProcessor() {

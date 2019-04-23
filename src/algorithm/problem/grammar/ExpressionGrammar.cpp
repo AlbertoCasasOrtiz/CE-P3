@@ -22,19 +22,24 @@ std::string ExpressionGrammar::getExpression() {
 
 std::string ExpressionGrammar::expr() {
     if(this->chromosomeProcessor->endByWrap()) return "";
-    this->chromosomeProcessor->consumeCodon();
     switch (this->chromosomeProcessor->getInteger() % 6){
         case 0:
+            this->chromosomeProcessor->consumeCodon();
             return this->sign()+this->real()+this->kg();
         case 1:
+            this->chromosomeProcessor->consumeCodon();
             return this->sign()+this->real()+this->kg()+this->expr();
         case 2:
+            this->chromosomeProcessor->consumeCodon();
             return this->sign()+this->real()+this->kp();
         case 3:
+            this->chromosomeProcessor->consumeCodon();
             return this->sign()+this->real()+this->kp()+this->expr();
         case 4:
+            this->chromosomeProcessor->consumeCodon();
             return this->sign()+this->real()+this->ks();
         case 5:
+            this->chromosomeProcessor->consumeCodon();
             return this->sign()+this->real()+this->ks()+this->expr();
         default:
             //TODO ERROR
@@ -56,11 +61,12 @@ std::string ExpressionGrammar::ks() {
 
 std::string ExpressionGrammar::sign() {
     if(this->chromosomeProcessor->endByWrap()) return "";
-    this->chromosomeProcessor->consumeCodon();
     switch (this->chromosomeProcessor->getInteger() % 2){
         case 0:
+            this->chromosomeProcessor->consumeCodon();
             return "+";
         case 1:
+            this->chromosomeProcessor->consumeCodon();
             return "-";
     }
     //TODO Error
@@ -80,21 +86,24 @@ std::string ExpressionGrammar::null() {
 
 std::string ExpressionGrammar::degree() {
     if(this->chromosomeProcessor->endByWrap()) return "";
+    std::string str = std::to_string(this->chromosomeProcessor->getInteger() % 5);
     this->chromosomeProcessor->consumeCodon();
-    return std::to_string(this->chromosomeProcessor->getInteger() % 5);
+    return str;
 }
 
 std::string ExpressionGrammar::oneNine() {
     if(this->chromosomeProcessor->endByWrap()) return "";
+    std::string str = std::to_string((this->chromosomeProcessor->getInteger() % 9) + 1);
     this->chromosomeProcessor->consumeCodon();
-    return std::to_string((this->chromosomeProcessor->getInteger() % 9) + 1);
+    return str;
 
 }
 
 std::string ExpressionGrammar::zeroNine() {
     if(this->chromosomeProcessor->endByWrap()) return "";
+    std::string str = std::to_string(this->chromosomeProcessor->getInteger() % 10);
     this->chromosomeProcessor->consumeCodon();
-    return std::to_string(this->chromosomeProcessor->getInteger() % 10);
+    return str;
 }
 
 ExpressionGrammar::~ExpressionGrammar() {

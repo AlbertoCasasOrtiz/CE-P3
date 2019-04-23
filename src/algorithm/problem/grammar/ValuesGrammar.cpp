@@ -30,20 +30,25 @@ std::vector<double>* ValuesGrammar::getValues()
 
 std::vector<double>* ValuesGrammar::expr() {
     if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
-    this->chromosomeProcessor->consumeCodon();
     switch (this->chromosomeProcessor->getInteger() % 6){
         case 0:
+            this->chromosomeProcessor->consumeCodon();
             return VectorFunctions::mul(this->kg(), this->sign()*this->real());
         case 1:
-            return VectorFunctions::mul(VectorFunctions::mul(this->kg(), this->sign()*this->real()), this->expr());
+            this->chromosomeProcessor->consumeCodon();
+            return VectorFunctions::add(VectorFunctions::mul(this->kg(), this->sign()*this->real()), this->expr());
         case 2:
+            this->chromosomeProcessor->consumeCodon();
             return VectorFunctions::mul(this->kp(), this->sign()*this->real());
         case 3:
-            return VectorFunctions::mul(VectorFunctions::mul(this->kp(), this->sign()*this->real()), this->expr());
+            this->chromosomeProcessor->consumeCodon();
+            return VectorFunctions::add(VectorFunctions::mul(this->kp(), this->sign()*this->real()), this->expr());
         case 4:
+            this->chromosomeProcessor->consumeCodon();
             return VectorFunctions::mul(this->ks(), this->sign()*this->real());
         case 5:
-            return VectorFunctions::mul(VectorFunctions::mul(this->ks(), this->sign()*this->real()), this->expr());
+            this->chromosomeProcessor->consumeCodon();
+            return VectorFunctions::add(VectorFunctions::mul(this->ks(), this->sign()*this->real()), this->expr());
         default:
             return new std::vector<double>();
     }
@@ -88,11 +93,12 @@ std::vector<double>* ValuesGrammar::ks() {
 
 double ValuesGrammar::sign() {
     if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<double>::min();
-    this->chromosomeProcessor->consumeCodon();
     switch (this->chromosomeProcessor->getInteger() % 2){
         case 0:
+            this->chromosomeProcessor->consumeCodon();
             return 1.0;
         case 1:
+            this->chromosomeProcessor->consumeCodon();
             return -1.0;
     }
     //TODO Error
@@ -113,21 +119,22 @@ void ValuesGrammar::null() {
 
 int ValuesGrammar::degree() {
     if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
+    int res = this->chromosomeProcessor->getInteger() % 5;
     this->chromosomeProcessor->consumeCodon();
-    return this->chromosomeProcessor->getInteger() % 5;
+    return res;
 }
 
 int ValuesGrammar::oneNine() {
     if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
-    this->chromosomeProcessor->consumeCodon();
     int res = (this->chromosomeProcessor->getInteger() % 9) + 1;
+    this->chromosomeProcessor->consumeCodon();
     return res;
 }
 
 int ValuesGrammar::zeroNine() {
     if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
-    this->chromosomeProcessor->consumeCodon();
     int res = this->chromosomeProcessor->getInteger() % 10;
+    this->chromosomeProcessor->consumeCodon();
     return res;
 }
 

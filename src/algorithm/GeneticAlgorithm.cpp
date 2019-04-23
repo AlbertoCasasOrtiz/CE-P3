@@ -47,7 +47,7 @@ void GeneticAlgorithm::execute() {
             this->population->increaseAge();
             GeneticAlgorithm::currentGenerations++;
             if(GeneticAlgorithm::currentGenerations % 20 == 0) {
-                std::cout << (100*GeneticAlgorithm::currentGenerations)/Configuration::maxNumGenerations << std::endl;
+                std::cout << (100*GeneticAlgorithm::currentGenerations)/Configuration::maxNumGenerations << "%" << std::endl;
             }
         }
         this->timer->tac();
