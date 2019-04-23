@@ -23,7 +23,10 @@ double ProblemGrammar::function(std::vector<int>* parameters) {
         delete result;
         delete expected;
         return res;
-    } else return std::numeric_limits<double>::max();
+    } else{
+        delete result;
+        return std::numeric_limits<double>::max();
+    }
 }
 
 std::vector<double>* ProblemGrammar::decode(std::vector<int>* parameters) {

@@ -12,6 +12,8 @@ int QualityMeasures::numHits(std::vector<double>* expected, std::vector<double>*
             numHits++;
         }
     }
+    delete expected;
+    delete obtained;
     return numHits;
 }
 

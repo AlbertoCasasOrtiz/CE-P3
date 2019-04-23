@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <windows.h>
 
 Problem* Configuration::problem;
 int Configuration::numExecutions;
@@ -32,8 +31,6 @@ bool Configuration::elitism;
 int Configuration::numElitism;
 
 void Configuration::loadConfiguration() {
-    char buffer[MAX_PATH];
-    GetModuleFileName( nullptr, buffer, MAX_PATH );
     std::string pathConfig = "config/config.cfg";
     std::ifstream file(pathConfig);
     std::string sline;

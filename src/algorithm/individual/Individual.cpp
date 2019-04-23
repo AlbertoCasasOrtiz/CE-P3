@@ -103,7 +103,6 @@ Individual* Individual::copy() {
 }
 
 std::string Individual::toString() {
-    std::vector<double>* fenotype = this->getFenotype();
     std::ostringstream str;
     str << "Fitness: " << this->fitness << "\n";
     str << "Probability: " << this->probability << "\n";
@@ -116,14 +115,18 @@ std::string Individual::toString() {
     }
     str << "\n";
     str << "Result: " << "\n";
+    std::vector<double>* fenotype = this->getFenotype();
     for(double param : *fenotype){
         str << param << "\n";
     }
+    delete fenotype;
     str << "\n";
     str << "Expected: " << "\n";
-    for(double xi : *Functions::executeFunction(Configuration::function)){
+    std::vector<double>* expected = Functions::executeFunction(Configuration::function);
+    for(double xi : *expected){
         str << xi << "\n";
     }
+    delete expected;
     return str.str();
 }
 

@@ -31,8 +31,8 @@ bool IndividualSet::comparatorDescendant(Individual *i1, Individual *i2) {
 IndividualSet::IndividualSet() {
     this->set = new std::vector<Individual*>();
     averageFitness = 0.0;
-    bestIndividual = new Individual();
-    worstIndividual = new Individual();
+    this->bestIndividual = nullptr;
+    this->worstIndividual = nullptr;
 }
 
 IndividualSet::~IndividualSet() {
@@ -59,13 +59,17 @@ void IndividualSet::initialize() {
 }
 
 void IndividualSet::evaluate(bool count) {
+    for(Individual* ind: *this->set){
+        ind->evaluate();
+    }
+    this->consistency();
+}
+
+void IndividualSet::consistency() {
     double bestFitness = std::numeric_limits<double>::lowest();
     double worstFitness = std::numeric_limits<double>::infinity();
     this->averageFitness = 0.0;
     for(Individual* ind: *this->set){
-        ind->evaluate();
-        if(count)
-            GeneticAlgorithm::evaluations++;
         this->averageFitness += ind->getFitness();
         this->bestIndividual = ind->getFitness() >= bestFitness ? ind : this->bestIndividual;
         bestFitness = bestIndividual->getFitness();
@@ -87,8 +91,8 @@ int IndividualSet::sizeOf() {
 void IndividualSet::clear() {
     this->set->clear();
     this->averageFitness = 0.0;
-    this->bestIndividual = new Individual();
-    this->worstIndividual = new Individual();
+    this->bestIndividual = nullptr;
+    this->worstIndividual = nullptr;
 }
 
 void IndividualSet::addElement(Individual* ind) {
@@ -123,20 +127,6 @@ Individual* IndividualSet::getWorstIndividual() {
 
 Individual* IndividualSet::getIndividual(int i) {
     return this->set->at(i);
-}
-
-void IndividualSet::consistency() {
-    double bestFitness = std::numeric_limits<double>::lowest();
-    double worstFitness = std::numeric_limits<double>::infinity();
-    this->averageFitness = 0.0;
-    for(Individual* ind: *this->set){
-        this->averageFitness += ind->getFitness();
-        this->bestIndividual = ind->getFitness() >= bestFitness ? ind : this->bestIndividual;
-        bestFitness = bestIndividual->getFitness();
-        this->worstIndividual = ind->getFitness() <= worstFitness ? ind : this->worstIndividual;
-        worstFitness = worstIndividual->getFitness();
-    }
-    this->averageFitness /= this->set->size();
 }
 
 IndividualSet *IndividualSet::clone() {

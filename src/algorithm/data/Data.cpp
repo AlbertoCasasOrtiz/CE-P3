@@ -6,7 +6,7 @@
 #include "../individual/IndividualSet.h"
 
 Data::Data() {
-    this->population = new IndividualSet();
+    this->population;
     this->time = 0;
     this->generations = 0;
     this->evaluations = 0;

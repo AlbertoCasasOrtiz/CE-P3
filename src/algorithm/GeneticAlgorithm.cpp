@@ -34,7 +34,6 @@ void GeneticAlgorithm::execute() {
         while(GeneticAlgorithm::currentGenerations < Configuration::maxNumGenerations){
             delete this->elite;
             this->elite = this->selectElite();
-            this->selectElite();
             parents = Configuration::selectionParents->select(this->population);
             offspring = Configuration::reproduction->reproduce(parents);
             Configuration::mutation->mutate(offspring);
