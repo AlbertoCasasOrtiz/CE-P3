@@ -46,6 +46,10 @@ void GeneticAlgorithm::execute() {
             this->addEliteToPopulation();
             this->population->increaseAge();
             GeneticAlgorithm::currentGenerations++;
+
+            /*std::cout << this->population->getBestIndividual()->getFitness() << std::endl;
+            std::cout << this->population->getBestIndividual()->getExpression() << std::endl;
+            std::cout << std::endl;*/
             if(GeneticAlgorithm::currentGenerations % 50 == 0) {
                 std::cout << (100*GeneticAlgorithm::currentGenerations)/Configuration::maxNumGenerations << "%" << std::endl;
             }

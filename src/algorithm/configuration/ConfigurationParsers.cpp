@@ -8,6 +8,7 @@
 #include "../operators/selectionparents/SelectionParentsAllParents.h"
 #include "../operators/selectionsurvivors/SelectionSurvivorsGenerational.h"
 #include "../problem/ProblemGrammar.h"
+#include "../operators/reproduction/ReproductionCrossoverTwoPoints.h"
 
 int ConfigurationParsers::parseInt(const std::string& line) {
     return std::stoi(line);
@@ -34,8 +35,10 @@ Mutation* ConfigurationParsers::parseMutation(const std::string& line) {
 }
 
 Reproduction *ConfigurationParsers::parseReproduction(const std::string& line) {
-    if(line == "Crossover One Point"){
+    if(line == "Crossover One Point") {
         return new ReproductionCrossoverOnePoint();
+    }else if(line == "Crossover Two Point"){
+            return new ReproductionCrossoverTwoPoints();
     } else return nullptr;
 }
 
