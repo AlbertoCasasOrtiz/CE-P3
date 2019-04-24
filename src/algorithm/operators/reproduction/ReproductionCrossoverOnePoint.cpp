@@ -26,8 +26,8 @@ IndividualSet *ReproductionCrossoverOnePoint::reproduce(IndividualSet *parents) 
 
 IndividualSet *ReproductionCrossoverOnePoint::crossover(Individual* i1, Individual* i2) {
     auto *indSet = new IndividualSet();
-    int point1 = RandomGenerator::getInt(0, i1->sizeOf());
-    int point2 = RandomGenerator::getInt(0, i2->sizeOf());
+    int point1 = RandomGenerator::getInt(0, floor(i1->sizeOf()));
+    int point2 = RandomGenerator::getInt(0, floor(i2->sizeOf()));
 
     Individual *ind1 = this->createIndividual(i1, i2, point1, point2);
     Individual *ind2 = this->createIndividual(i2, i1, point2, point1);

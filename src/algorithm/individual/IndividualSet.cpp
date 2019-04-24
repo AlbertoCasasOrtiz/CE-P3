@@ -61,6 +61,8 @@ void IndividualSet::initialize() {
 void IndividualSet::evaluate(bool count) {
     for(Individual* ind: *this->set){
         ind->evaluate();
+        if(count)
+            GeneticAlgorithm::evaluations++;
     }
     this->consistency();
 }
