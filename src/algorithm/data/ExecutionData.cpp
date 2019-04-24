@@ -1,67 +1,67 @@
 //
-// Created by alber on 21/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#include "Data.h"
+#include "ExecutionData.h"
 #include "../individual/IndividualSet.h"
 
-Data::Data() {
-    this->population;
+ExecutionData::ExecutionData() {
     this->time = 0;
     this->generations = 0;
     this->evaluations = 0;
     this->hits = 0;
 }
 
-Data::~Data(){
+ExecutionData::~ExecutionData(){
     delete this->population;
 }
 
-void Data::setPopulation(IndividualSet *vector) {
+void ExecutionData::setPopulation(IndividualSet *vector) {
     this->population = vector;
 }
 
-void Data::setTime(double value) {
+void ExecutionData::setTime(double value) {
     this->time = value;
 }
 
-void Data::setGenerations(int value) {
+void ExecutionData::setGenerations(int value) {
     this->generations = value;
 }
 
-void Data::setEvaluations(int value) {
+void ExecutionData::setEvaluations(int value) {
     this->evaluations = value;
 }
 
-void Data::setHits(int value) {
+void ExecutionData::setHits(int value) {
     this->hits = value;
 }
 
-IndividualSet *Data::getPopulation() {
+IndividualSet *ExecutionData::getPopulation() {
     return this->population;
 }
 
-double Data::getTime() {
+double ExecutionData::getTime() {
     return this->time;
 }
 
-int Data::getGenerations() {
+int ExecutionData::getGenerations() {
     return this->generations;
 }
 
-int Data::getEvaluations() {
+int ExecutionData::getEvaluations() {
     return this->evaluations;
 }
 
-int Data::getHits() {
+int ExecutionData::getHits() {
     return this->hits;
 }
 
-std::string Data::toString() {
+std::string ExecutionData::toString() {
     std::string str;
     str += this->population->getBestIndividual()->toString() + "\n\n";
     str += "Time: " + std::to_string(this->getTime()) + "\n";
     str += "Evaluations: " + std::to_string(this->getEvaluations()) + "\n";
+    str += "Generations: " + std::to_string(this->getGenerations()) + "\n";
     str += "Best Fitness: " + std::to_string(this->population->getBestIndividual()->getFitness()) + "\n";
     str += "Worst Fitness: " + std::to_string(this->population->getWorstIndividual()->getFitness()) + "\n";
     return str;

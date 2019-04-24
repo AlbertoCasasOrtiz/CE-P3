@@ -1,18 +1,26 @@
 //
-// Created by alber on 17/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_SELECTIONPARENTS_H
-#include "../../individual/IndividualSet.h"
+#ifndef SELECTIONPARENTS_H
 
-#define CE_ACTIVIDAD_3_SELECTIONPARENTS_H
+    #include "../../individual/IndividualSet.h"
+
+#define SELECTIONPARENTS_H
 
 
+/**
+ * Class defining a selection parents method.
+ */
 class SelectionParents {
 public:
-    virtual IndividualSet *select(IndividualSet *parents) = 0;
-    virtual ~SelectionParents() = default;
+    /**
+     * Select parents from population.
+     * @param population Population.
+     * @return Selected parents.
+     */
+    virtual IndividualSet *select(IndividualSet *population) = 0;
 };
 
 
-#endif //CE_ACTIVIDAD_3_SELECTIONPARENTS_H
+#endif //SELECTIONPARENTS_H

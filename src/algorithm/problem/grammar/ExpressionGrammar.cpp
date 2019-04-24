@@ -1,7 +1,6 @@
 #include <utility>
-
 //
-// Created by alber on 18/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "ExpressionGrammar.h"
@@ -22,7 +21,7 @@ std::string ExpressionGrammar::getExpression() {
 
 std::string ExpressionGrammar::expr() {
     if(this->chromosomeProcessor->endByWrap()) return "";
-    switch (this->chromosomeProcessor->getInteger() % 6){
+    switch (this->chromosomeProcessor->getCodon() % 6){
         case 0:
             this->chromosomeProcessor->consumeCodon();
             return this->sign()+this->real()+this->kg();
@@ -61,7 +60,7 @@ std::string ExpressionGrammar::ks() {
 
 std::string ExpressionGrammar::sign() {
     if(this->chromosomeProcessor->endByWrap()) return "";
-    switch (this->chromosomeProcessor->getInteger() % 2){
+    switch (this->chromosomeProcessor->getCodon() % 2){
         case 0:
             this->chromosomeProcessor->consumeCodon();
             return "+";
@@ -86,14 +85,14 @@ std::string ExpressionGrammar::null() {
 
 std::string ExpressionGrammar::degree() {
     if(this->chromosomeProcessor->endByWrap()) return "";
-    std::string str = std::to_string(this->chromosomeProcessor->getInteger() % 5);
+    std::string str = std::to_string(this->chromosomeProcessor->getCodon() % 5);
     this->chromosomeProcessor->consumeCodon();
     return str;
 }
 
 std::string ExpressionGrammar::oneNine() {
     if(this->chromosomeProcessor->endByWrap()) return "";
-    std::string str = std::to_string((this->chromosomeProcessor->getInteger() % 9) + 1);
+    std::string str = std::to_string((this->chromosomeProcessor->getCodon() % 9) + 1);
     this->chromosomeProcessor->consumeCodon();
     return str;
 
@@ -101,7 +100,7 @@ std::string ExpressionGrammar::oneNine() {
 
 std::string ExpressionGrammar::zeroNine() {
     if(this->chromosomeProcessor->endByWrap()) return "";
-    std::string str = std::to_string(this->chromosomeProcessor->getInteger() % 10);
+    std::string str = std::to_string(this->chromosomeProcessor->getCodon() % 10);
     this->chromosomeProcessor->consumeCodon();
     return str;
 }

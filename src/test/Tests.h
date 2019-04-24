@@ -1,15 +1,22 @@
 //
-// Created by alber on 24/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_TESTS_H
-#define CE_ACTIVIDAD_3_TESTS_H
+#ifndef TESTS_H
+#define TESTS_H
 
 
+/**
+ * Test functions.
+ */
 class Tests {
 public:
+    /**
+     * Function fot test grammars.
+     * @return True if the test has been passed.
+     */
     static bool testGrammars();
 };
 
 
-#endif //CE_ACTIVIDAD_3_TESTS_H
+#endif //TESTS_H

@@ -1,11 +1,13 @@
 //
-// Created by alber on 13/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_OBSERVABLE_H
-#include "Observer.h"
-#include "vector"
-#define CE_ACTIVIDAD_3_OBSERVABLE_H
+#ifndef OBSERVABLE_H
+
+    #include "Observer.h"
+    #include "vector"
+
+#define OBSERVABLE_H
 
 
 
@@ -21,4 +23,4 @@ public:
 };
 
 
-#endif //CE_ACTIVIDAD_3_OBSERVABLE_H
+#endif //OBSERVABLE_H

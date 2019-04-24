@@ -1,10 +1,12 @@
 //
-// Created by alber on 14/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_OBSERVER_H
-#include <string>
-#define CE_ACTIVIDAD_3_OBSERVER_H
+#ifndef OBSERVER_H
+
+    #include <string>
+
+#define OBSERVER_H
 
 
 
@@ -15,4 +17,4 @@ public:
 };
 
 
-#endif //CE_ACTIVIDAD_3_OBSERVER_H
+#endif //OBSERVER_H

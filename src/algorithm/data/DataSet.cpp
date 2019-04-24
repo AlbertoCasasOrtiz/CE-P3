@@ -1,11 +1,11 @@
 //
-// Created by alber on 20/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "DataSet.h"
 
 DataSet::DataSet() {
-    this->dataSet = new std::vector<Data*>();
+    this->dataSet = new std::vector<ExecutionData*>();
 }
 
 DataSet::~DataSet() {
@@ -14,19 +14,16 @@ DataSet::~DataSet() {
     delete this->dataSet;
 }
 
-void DataSet::setDataSet(std::vector<Data *> *vector) {
-    this->dataSet = vector;
-}
 
-std::vector<Data*> *DataSet::getDataSet() {
+std::vector<ExecutionData*> *DataSet::getDataSet() {
     return this->dataSet;
 }
 
-void DataSet::addData(Data *data) {
-    this->dataSet->push_back(data);
+void DataSet::addData(ExecutionData *executionData) {
+    this->dataSet->push_back(executionData);
 }
 
-Data *DataSet::getData(int data) {
-    return this->dataSet->at(data);
+ExecutionData *DataSet::getExecutionData(int pos) {
+    return this->dataSet->at(pos);
 }
 

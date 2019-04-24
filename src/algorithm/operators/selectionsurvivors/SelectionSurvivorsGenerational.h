@@ -1,19 +1,28 @@
 //
-// Created by alber on 15/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_SELECTIONSURVIVORSGENERATIONAL_H
-#include "../../individual/IndividualSet.h"
-#include "SelectionSurvivors.h"
+#ifndef SELECTIONSURVIVORSGENERATIONAL_H
 
-#define CE_ACTIVIDAD_3_SELECTIONSURVIVORSGENERATIONAL_H
+    #include "../../individual/IndividualSet.h"
+    #include "SelectionSurvivors.h"
+
+#define SELECTIONSURVIVORSGENERATIONAL_H
 
 
-
+/**
+ * Select survivors from offspring. Select the best of the offspring.
+ */
 class SelectionSurvivorsGenerational: public SelectionSurvivors{
 public:
+    /**
+     * Select survivors from the offspring.
+     * @param parents Selected parents.
+     * @param offspring Generated offspring.
+     * @return Survivors selected.
+     */
     IndividualSet *select(IndividualSet *parents, IndividualSet *offspring) override;
 };
 
 
-#endif //CE_ACTIVIDAD_3_SELECTIONSURVIVORSGENERATIONAL_H
+#endif //SELECTIONSURVIVORSGENERATIONAL_H

@@ -1,7 +1,6 @@
 #include <utility>
-
 //
-// Created by alber on 18/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "ValuesGrammar.h"
@@ -30,7 +29,7 @@ std::vector<double>* ValuesGrammar::getValues()
 
 std::vector<double>* ValuesGrammar::expr() {
     if(this->chromosomeProcessor->endByWrap()) return new std::vector<double>();
-    switch (this->chromosomeProcessor->getInteger() % 6){
+    switch (this->chromosomeProcessor->getCodon() % 6){
         case 0:
             this->chromosomeProcessor->consumeCodon();
             return VectorFunctions::mul(this->kg(), this->sign()*this->real());
@@ -93,7 +92,7 @@ std::vector<double>* ValuesGrammar::ks() {
 
 double ValuesGrammar::sign() {
     if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<double>::min();
-    switch (this->chromosomeProcessor->getInteger() % 2){
+    switch (this->chromosomeProcessor->getCodon() % 2){
         case 0:
             this->chromosomeProcessor->consumeCodon();
             return 1.0;
@@ -119,21 +118,21 @@ void ValuesGrammar::null() {
 
 int ValuesGrammar::degree() {
     if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
-    int res = this->chromosomeProcessor->getInteger() % 5;
+    int res = this->chromosomeProcessor->getCodon() % 5;
     this->chromosomeProcessor->consumeCodon();
     return res;
 }
 
 int ValuesGrammar::oneNine() {
     if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
-    int res = (this->chromosomeProcessor->getInteger() % 9) + 1;
+    int res = (this->chromosomeProcessor->getCodon() % 9) + 1;
     this->chromosomeProcessor->consumeCodon();
     return res;
 }
 
 int ValuesGrammar::zeroNine() {
     if(this->chromosomeProcessor->endByWrap()) return std::numeric_limits<int>::min();
-    int res = this->chromosomeProcessor->getInteger() % 10;
+    int res = this->chromosomeProcessor->getCodon() % 10;
     this->chromosomeProcessor->consumeCodon();
     return res;
 }

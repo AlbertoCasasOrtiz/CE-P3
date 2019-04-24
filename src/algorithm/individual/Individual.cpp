@@ -1,5 +1,5 @@
 //
-// Created by alber on 14/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "Individual.h"
@@ -12,7 +12,7 @@
 
 
 Individual::Individual() {
-    this->params = new std::vector<int>();
+    this->chromosome = new std::vector<int>();
     this->fitness = 0;
     this->probability = 0;
     this->accumulatedProbability = 0;
@@ -20,29 +20,29 @@ Individual::Individual() {
 }
 
 Individual::~Individual() {
-    delete this->params;
+    delete this->chromosome;
 }
 
-
-
 void Individual::initialize() {
+    //Generate a random size for the individual.
     int size = RandomGenerator::getInt(1, Configuration::maxChromosomeSize);
     for(int i = 0; i < size; i++){
-        this->params->push_back(RandomGenerator::getInt(1, Configuration::maxCodonValue));
+        //Insert random codons in the individual.
+        this->chromosome->push_back(RandomGenerator::getInt(1, Configuration::maxCodonValue));
     }
 }
 
 void Individual::evaluate() {
-    this->fitness = Configuration::problem->evaluate(this->params);
-    this->expression = Configuration::problem->getExpression(this->params);
+    this->fitness = Configuration::problem->evaluate(this->chromosome);
+    this->expression = Configuration::problem->getExpression(this->chromosome);
 }
 
 std::vector<double>* Individual::getFenotype() {
-    return Configuration::problem->decode(this->params);
+    return Configuration::problem->decode(this->chromosome);
 }
 
 int Individual::sizeOf() {
-    return this->params->size();
+    return this->chromosome->size();
 }
 
 int Individual::getAge() {
@@ -53,12 +53,12 @@ void Individual::increaseAge() {
     this->age++;
 }
 
-std::vector<int>* Individual::getParam() {
-    return this->params;
+std::vector<int>* Individual::getChromosome() {
+    return this->chromosome;
 }
 
-void Individual::addParam(int object) {
-    this->params->push_back(object);
+void Individual::addCodon(int object) {
+    this->chromosome->push_back(object);
 }
 
 double Individual::getProbability() {
@@ -96,8 +96,8 @@ Individual* Individual::copy() {
     ind->probability = this->probability;
     ind->accumulatedProbability = this->accumulatedProbability;
     ind->age = this->age;
-    for(int param : *this->params){
-        ind->params->push_back(param);
+    for(int param : *this->chromosome){
+        ind->chromosome->push_back(param);
     }
     return ind;
 }
@@ -110,7 +110,7 @@ std::string Individual::toString() {
     str << "Age: " << this->age << "\n";
     str << "Expression: " << this->getExpression() << std::endl;
     str << "Genotype: " << "\n";
-    for(int param : *this->params){
+    for(int param : *this->chromosome){
         str << param << " ";
     }
     str << "\n";
@@ -131,5 +131,5 @@ std::string Individual::toString() {
 }
 
 std::string Individual::getExpression() {
-    return Configuration::problem->getExpression(this->params);
+    return Configuration::problem->getExpression(this->chromosome);
 }

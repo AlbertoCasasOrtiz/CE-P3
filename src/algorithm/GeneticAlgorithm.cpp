@@ -1,5 +1,5 @@
 //
-// Created by alber on 13/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "GeneticAlgorithm.h"
@@ -55,8 +55,8 @@ void GeneticAlgorithm::execute() {
             }
         }
         this->timer->tac();
-        Data* data = new Data();
-        data->setPopulation(this->population->clone());
+        ExecutionData* data = new ExecutionData();
+        data->setPopulation(this->population->copy());
         data->setGenerations(GeneticAlgorithm::currentGenerations);
         data->setTime(this->timer->getTime());
         data->setEvaluations(GeneticAlgorithm::evaluations);

@@ -1,7 +1,6 @@
 #include <utility>
-
 //
-// Created by alber on 18/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "ChromosomeProcessor.h"
@@ -14,7 +13,7 @@ ChromosomeProcessor::ChromosomeProcessor(std::vector<int>* array) {
     this->currentWrap = 0;
 }
 
-int ChromosomeProcessor::getInteger() {
+int ChromosomeProcessor::getCodon() {
     return this->chromosome->at(this->position);
 }
 

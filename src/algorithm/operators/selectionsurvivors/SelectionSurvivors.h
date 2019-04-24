@@ -1,18 +1,27 @@
 //
-// Created by alber on 15/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_SELECTIONSURVIVORS_H
-#define CE_ACTIVIDAD_3_SELECTIONSURVIVORS_H
+#ifndef SELECTIONSURVIVORS_H
+
+    #include "../../individual/IndividualSet.h"
+
+#define SELECTIONSURVIVORS_H
 
 
-#include "../../individual/IndividualSet.h"
-
+/**
+ * Class defining a selection survivors method.
+ */
 class SelectionSurvivors {
 public:
+    /**
+     * Select survivors from parents and offspring.
+     * @param parents Selected parents.
+     * @param offspring Generated offspring.
+     * @return Survivors selected.
+     */
     virtual IndividualSet *select(IndividualSet *parents, IndividualSet *offspring) = 0;
-    virtual ~SelectionSurvivors() = default;
 };
 
 
-#endif //CE_ACTIVIDAD_3_SELECTIONSURVIVORS_H
+#endif //SELECTIONSURVIVORS_H

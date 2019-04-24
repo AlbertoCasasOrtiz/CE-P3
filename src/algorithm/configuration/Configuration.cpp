@@ -1,5 +1,5 @@
 //
-// Created by alber on 14/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "Configuration.h"
@@ -109,14 +109,5 @@ void Configuration::generateX() {
         Configuration::x->push_back(cont);
         cont += sampleSize;
     }
-}
-
-Configuration::~Configuration() {
-    delete Configuration::x;
-    delete Configuration::problem;
-    delete Configuration::selectionParents;
-    delete Configuration::reproduction;
-    delete Configuration::mutation;
-    delete Configuration::selectionSurvivors;
 }
 

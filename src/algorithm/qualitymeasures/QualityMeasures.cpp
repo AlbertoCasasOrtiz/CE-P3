@@ -1,5 +1,5 @@
 //
-// Created by alber on 22/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "QualityMeasures.h"
@@ -20,7 +20,7 @@ int QualityMeasures::numHits(std::vector<double>* expected, std::vector<double>*
 double QualityMeasures::averageNumHits(DataSet dataset) {
     double averageNumHits = 0.0;
     for(int i = 0; i < dataset.getDataSet()->size(); i++){
-        averageNumHits += dataset.getData(i)->getHits();
+        averageNumHits += dataset.getExecutionData(i)->getHits();
     }
     return averageNumHits / dataset.getDataSet()->size();
 }
@@ -32,7 +32,7 @@ double QualityMeasures::bestFitness(IndividualSet individualSet) {
 double QualityMeasures::averageBestFitness(DataSet dataSet) {
     double averageBestFitness = 0.0;
     for(int i = 0; i < dataSet.getDataSet()->size(); i++){
-        averageBestFitness += dataSet.getData(i)->getPopulation()->getBestIndividual()->getFitness();
+        averageBestFitness += dataSet.getExecutionData(i)->getPopulation()->getBestIndividual()->getFitness();
     }
     return averageBestFitness / dataSet.getDataSet()->size();
 }
@@ -44,31 +44,31 @@ double QualityMeasures::worstFitness(IndividualSet individualSet) {
 double QualityMeasures::averageWorstFitness(DataSet dataSet) {
     double averageWorstFitness = 0.0;
     for(int i = 0; i < dataSet.getDataSet()->size(); i++){
-        averageWorstFitness += dataSet.getData(i)->getPopulation()->getWorstIndividual()->getFitness();
+        averageWorstFitness += dataSet.getExecutionData(i)->getPopulation()->getWorstIndividual()->getFitness();
     }
     return averageWorstFitness / dataSet.getDataSet()->size();
 }
 
-int QualityMeasures::numEvaluations(Data data) {
+int QualityMeasures::numEvaluations(ExecutionData data) {
     return data.getEvaluations();
 }
 
 double QualityMeasures::averageNumEvaluations(DataSet dataSet) {
     double averageNumEvaluations = 0.0;
     for(int i = 0; i < dataSet.getDataSet()->size(); i++){
-        averageNumEvaluations += dataSet.getData(i)->getEvaluations();
+        averageNumEvaluations += dataSet.getExecutionData(i)->getEvaluations();
     }
     return averageNumEvaluations / dataSet.getDataSet()->size();
 }
 
-int QualityMeasures::time(Data data) {
+double QualityMeasures::time(ExecutionData data) {
     return data.getTime();
 }
 
 double QualityMeasures::averageTime(DataSet dataSet) {
     double averageTime = 0.0;
     for(int i = 0; i < dataSet.getDataSet()->size(); i++){
-        averageTime += dataSet.getData(i)->getTime();
+        averageTime += dataSet.getExecutionData(i)->getTime();
     }
     return averageTime / dataSet.getDataSet()->size();
 }

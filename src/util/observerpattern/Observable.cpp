@@ -1,5 +1,5 @@
 //
-// Created by alber on 13/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "Observable.h"

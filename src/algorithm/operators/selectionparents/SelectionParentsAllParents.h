@@ -1,18 +1,27 @@
 //
-// Created by alber on 17/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_SELECTIONPARENTSALLPARENTS_H
-#define CE_ACTIVIDAD_3_SELECTIONPARENTSALLPARENTS_H
+#ifndef SELECTIONPARENTSALLPARENTS_H
+
+    #include "SelectionParents.h"
+
+#define SELECTIONPARENTSALLPARENTS_H
 
 
-#include "SelectionParents.h"
-
+/**
+ * Select all parents from the population.
+ */
 class SelectionParentsAllParents: public SelectionParents{
 public:
+    /**
+     * Select parents from population. (Deep copy).
+     * @param population Population.
+     * @return Selected parents.
+     */
     IndividualSet *select(IndividualSet *parents) override;
 
 };
 
 
-#endif //CE_ACTIVIDAD_3_SELECTIONPARENTSALLPARENTS_H
+#endif //SELECTIONPARENTSALLPARENTS_H

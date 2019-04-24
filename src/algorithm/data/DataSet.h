@@ -1,31 +1,55 @@
 //
-// Created by alber on 20/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_DATASET_H
+#ifndef DATASET_H
 
-#include <vector>
-#include "../individual/Individual.h"
-#include "../individual/IndividualSet.h"
-#include "Data.h"
+    #include <vector>
+    #include "../individual/Individual.h"
+    #include "../individual/IndividualSet.h"
+    #include "ExecutionData.h"
 
-#define CE_ACTIVIDAD_3_DATASET_H
+#define DATASET_H
 
 
+/**
+ * Class containing data gathered in a set of executions.
+ */
 class DataSet {
 private:
-    std::vector<Data*>* dataSet;
+    /** DataSet containing data gathered in a set of executions. */
+    std::vector<ExecutionData*>* dataSet;
 public:
+    /**
+     * Constructor for class DataSet.
+     */
     DataSet();
+
+    /**
+     * Destructor for class DataSet.
+     */
     ~DataSet();
 
-    void setDataSet(std::vector<Data*>* vector);
-    std::vector<Data*>* getDataSet();
+    /**
+     * Get the full DataSet.
+     * @return Full DataSet.
+     */
+    std::vector<ExecutionData*>* getDataSet();
 
-    void addData(Data* data);
-    Data* getData(int data);
+    /**
+     * Add an execution to the dataSet.
+     * @param executionData Execution to add to the dataSet.
+     */
+    void addData(ExecutionData* executionData);
+
+    /**
+     * Get data of an execution in the position pos.
+     * @param pos Position of the execution.
+     * @return Execution in position pos.
+     */
+    ExecutionData* getExecutionData(int pos);
 
 };
 
 
-#endif //CE_ACTIVIDAD_3_DATASET_H
+#endif //DATASET_H

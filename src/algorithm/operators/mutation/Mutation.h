@@ -1,18 +1,25 @@
 //
-// Created by alber on 15/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_MUTATION_H
-#define CE_ACTIVIDAD_3_MUTATION_H
+#ifndef MUTATION_H
+
+    #include "../../individual/IndividualSet.h"
+
+#define MUTATION_H
 
 
-#include "../../individual/IndividualSet.h"
-
+/**
+ * Class defining a mutation method.
+ */
 class Mutation {
 public:
-    virtual IndividualSet *mutate(IndividualSet *set) = 0;
-    virtual ~Mutation() = default;
+    /**
+     * Mutate a set of individuals.
+     * @param set Set of individuals.
+     */
+    virtual void mutate(IndividualSet *set) = 0;
 };
 
 
-#endif //CE_ACTIVIDAD_3_MUTATION_H
+#endif //MUTATION_H

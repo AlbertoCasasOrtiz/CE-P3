@@ -1,18 +1,31 @@
 //
-// Created by alber on 15/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
-#ifndef CE_ACTIVIDAD_3_MUTATIONSWITCH_H
-#define CE_ACTIVIDAD_3_MUTATIONSWITCH_H
+#ifndef MUTATIONSWITCH_H
+
+    #include "Mutation.h"
+
+#define MUTATIONSWITCH_H
 
 
-#include "Mutation.h"
-
+/**
+ * MutationSwitch method. Switch the value of the codon to other valid random value.
+ */
 class MutationSwitch: public Mutation {
 public:
-    IndividualSet *mutate(IndividualSet *set) override;
+    /**
+     * Mutate a set of individuals.
+     * @param set Set of individuals.
+     */
+    void mutate(IndividualSet *set) override;
+
+    /**
+     * Mutate an Individual.
+     * @param ind Individual to be mutated.
+     */
     void mutateIndividual(Individual* ind);
 };
 
 
-#endif //CE_ACTIVIDAD_3_MUTATIONSWITCH_H
+#endif //MUTATIONSWITCH_H

@@ -1,7 +1,5 @@
-#include <utility>
-
 //
-// Created by alber on 14/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "IndividualSet.h"
@@ -10,6 +8,7 @@
 #include <limits>
 #include <iostream>
 #include <algorithm>
+#include <utility>
 
 void IndividualSet::sort(bool ascendent) {
     if (ascendent) {
@@ -131,12 +130,12 @@ Individual* IndividualSet::getIndividual(int i) {
     return this->set->at(i);
 }
 
-IndividualSet *IndividualSet::clone() {
+IndividualSet *IndividualSet::copy() {
     auto* individualSet = new IndividualSet();
     for(int i = 0; i < this->sizeOf(); i++){
         individualSet->set->push_back(this->set->at(i)->copy());
     }
-    //Best individual, worst individual and average fitness are declared
+    //Best individual, worst individual and average fitness are calculated
     //in the function consistency using data from the set.
     individualSet->consistency();
     return individualSet;

@@ -1,5 +1,5 @@
 //
-// Created by alber on 15/04/2019.
+// Created by Alberto Casas Ortiz.
 //
 
 #include "MutationSwitch.h"
@@ -8,15 +8,14 @@
 #include <random>
 #include <sstream>
 
-IndividualSet *MutationSwitch::mutate(IndividualSet *set) {
+void MutationSwitch::mutate(IndividualSet *set) {
     for(Individual* ind: *set->getSet()){
         this->mutateIndividual(ind);
     }
-    return set;
 }
 
 void MutationSwitch::mutateIndividual(Individual* ind) {
-    for(int & pos : *ind->getParam()){
+    for(int & pos : *ind->getChromosome()){
         if(Configuration::pMut >=  RandomGenerator::getDouble(0, 1.0)){
             pos =  RandomGenerator::getInt(0, Configuration::maxCodonValue);
         }
