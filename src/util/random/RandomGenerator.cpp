@@ -9,7 +9,7 @@
 std::mt19937 RandomGenerator::mt(time(nullptr));
 
 double RandomGenerator::getDouble(double start, double end) {
-    std::uniform_real_distribution<double> dist(start, end-1);
+    std::uniform_real_distribution<double> dist(start, end);
     return dist(mt);
 }
 
