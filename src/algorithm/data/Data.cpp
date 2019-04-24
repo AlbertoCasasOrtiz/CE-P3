@@ -21,7 +21,7 @@ void Data::setPopulation(IndividualSet *vector) {
     this->population = vector;
 }
 
-void Data::setTime(int value) {
+void Data::setTime(double value) {
     this->time = value;
 }
 
@@ -41,7 +41,7 @@ IndividualSet *Data::getPopulation() {
     return this->population;
 }
 
-int Data::getTime() {
+double Data::getTime() {
     return this->time;
 }
 
@@ -60,7 +60,7 @@ int Data::getHits() {
 std::string Data::toString() {
     std::string str;
     str += this->population->getBestIndividual()->toString() + "\n\n";
-    str += "Time: " + std::to_string(this->getTime()/60) + "\n";
+    str += "Time: " + std::to_string(this->getTime()) + "\n";
     str += "Evaluations: " + std::to_string(this->getEvaluations()) + "\n";
     str += "Best Fitness: " + std::to_string(this->population->getBestIndividual()->getFitness()) + "\n";
     str += "Worst Fitness: " + std::to_string(this->population->getWorstIndividual()->getFitness()) + "\n";

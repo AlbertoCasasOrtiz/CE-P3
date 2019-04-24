@@ -3,23 +3,25 @@
 //
 
 #include <chrono>
+#include <iostream>
 #include "Timer.h"
+#include <chrono>
 
 Timer::Timer() {
-    this->start = 0;
-    this->stop = 0;
+    this->start;
+    this->stop;
 }
 
 void Timer::tic() {
-    this->start = std::clock();
+    this->start = clock();
 }
 
 void Timer::tac() {
-    this->stop = std::clock();
+    this->stop = clock();
 }
 
-long Timer::getTime() {
-    long diffticks = this->stop - this->start;
-    long diffs = diffticks;
-    return diffs;
+double Timer::getTime() {
+    auto time = this->stop - this->start;
+    std::cout << time*1.0/CLOCKS_PER_SEC << std::endl;
+    return (time * 1.0/ CLOCKS_PER_SEC);
 }

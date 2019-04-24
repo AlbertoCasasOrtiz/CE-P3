@@ -16,7 +16,7 @@ public:
     Timer();
     void tic();
     void tac();
-    long getTime();
+    double getTime();
 };
 
 

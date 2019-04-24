@@ -13,7 +13,7 @@
 class Data {
 private:
     IndividualSet* population;
-    int time;
+    double time;
     int generations;
     int evaluations;
     int hits;
@@ -22,13 +22,13 @@ public:
     ~Data();
 
     void setPopulation(IndividualSet* vector);
-    void setTime(int value);
+    void setTime(double value);
     void setGenerations(int value);
     void setEvaluations(int value);
     void setHits(int value);
 
     IndividualSet* getPopulation();
-    int getTime();
+    double getTime();
     int getGenerations();
     int getEvaluations();
     int getHits();
