@@ -3,9 +3,13 @@
 //
 
 #include "QualityMeasures.h"
+#include "../problem/functions/Functions.h"
+#include "../configuration/Configuration.h"
 #include <cmath>
 
-int QualityMeasures::numHits(std::vector<double>* expected, std::vector<double>* obtained) {
+int QualityMeasures::numHits(ExecutionData data) {
+    std::vector<double>* expected = Functions::executeFunction(Configuration::function);
+    std::vector<double>* obtained = data.getPopulation()->getBestIndividual()->getFenotype();
     int numHits = 0;
     for(int i = 0; i < expected->size(); i++){
         if(std::abs(obtained->at(i) - expected->at(i)) < 0.1){
@@ -17,16 +21,28 @@ int QualityMeasures::numHits(std::vector<double>* expected, std::vector<double>*
     return numHits;
 }
 
+double QualityMeasures::bestFitness(ExecutionData data) {
+    return data.getPopulation()->getBestIndividual()->getFitness();
+}
+
+double QualityMeasures::worstFitness(ExecutionData data) {
+    return data.getPopulation()->getWorstIndividual()->getFitness();
+}
+
+int QualityMeasures::numEvaluations(ExecutionData data) {
+    return data.getEvaluations();
+}
+
+double QualityMeasures::time(ExecutionData data) {
+    return data.getTime();
+}
+
 double QualityMeasures::averageNumHits(DataSet dataset) {
     double averageNumHits = 0.0;
     for(int i = 0; i < dataset.getDataSet()->size(); i++){
         averageNumHits += dataset.getExecutionData(i)->getHits();
     }
     return averageNumHits / dataset.getDataSet()->size();
-}
-
-double QualityMeasures::bestFitness(IndividualSet individualSet) {
-    return individualSet.getBestIndividual()->getFitness();
 }
 
 double QualityMeasures::averageBestFitness(DataSet dataSet) {
@@ -37,10 +53,6 @@ double QualityMeasures::averageBestFitness(DataSet dataSet) {
     return averageBestFitness / dataSet.getDataSet()->size();
 }
 
-double QualityMeasures::worstFitness(IndividualSet individualSet) {
-    return individualSet.getWorstIndividual()->getFitness();
-}
-
 double QualityMeasures::averageWorstFitness(DataSet dataSet) {
     double averageWorstFitness = 0.0;
     for(int i = 0; i < dataSet.getDataSet()->size(); i++){
@@ -49,20 +61,12 @@ double QualityMeasures::averageWorstFitness(DataSet dataSet) {
     return averageWorstFitness / dataSet.getDataSet()->size();
 }
 
-int QualityMeasures::numEvaluations(ExecutionData data) {
-    return data.getEvaluations();
-}
-
 double QualityMeasures::averageNumEvaluations(DataSet dataSet) {
     double averageNumEvaluations = 0.0;
     for(int i = 0; i < dataSet.getDataSet()->size(); i++){
         averageNumEvaluations += dataSet.getExecutionData(i)->getEvaluations();
     }
     return averageNumEvaluations / dataSet.getDataSet()->size();
-}
-
-double QualityMeasures::time(ExecutionData data) {
-    return data.getTime();
 }
 
 double QualityMeasures::averageTime(DataSet dataSet) {

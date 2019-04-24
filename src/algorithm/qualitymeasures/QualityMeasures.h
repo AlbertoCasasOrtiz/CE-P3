@@ -17,25 +17,24 @@ class QualityMeasures {
 public:
     /**
      * Get number of hits achieved by the solution.
-     * @param expected Expected solution.
-     * @param obtained Obtained solution.
+     * @param data Information of the execution.
      * @return Number of hits achieved.
      */
-    static int numHits(std::vector<double>* expected, std::vector<double>* obtained);
+    static int numHits(ExecutionData data);
 
     /**
      * Get best fitness achieved by a population.
-     * @param individualSet Set containing the best individual.
+     * @param data Information of the execution.
      * @return Best fitness achieved in a population
      */
-    static double bestFitness(IndividualSet individualSet);
+    static double bestFitness(ExecutionData data);
 
     /**
      * Get worst fitness achieved by a population.
-     * @param individualSet Set containing the worst individual.
+     * @param data Information of the execution.
      * @return Worst fitness achieved in a population
      */
-    static double worstFitness(IndividualSet individualSet);
+    static double worstFitness(ExecutionData data);
 
     /**
      * Get number of evaluations completed by an execution.

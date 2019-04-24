@@ -54,7 +54,7 @@ void IndividualSet::initialize() {
         ind->initialize();
         this->set->push_back(ind);
     }
-    this->evaluate(true);
+    this->evaluate(false);
 }
 
 void IndividualSet::evaluate(bool count) {
