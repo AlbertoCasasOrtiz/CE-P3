@@ -99,9 +99,9 @@ double ValuesGrammar::sign() {
         case 1:
             this->chromosomeProcessor->consumeCodon();
             return -1.0;
+        default:
+            return std::numeric_limits<double>::min();
     }
-    //TODO Error
-    return std::numeric_limits<double>::min();
 }
 
 double ValuesGrammar::real() {

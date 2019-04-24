@@ -37,7 +37,7 @@ public:
      * @param point2 Crossove point of i2.
      * @return Child of the individual in those points.
      */
-    Individual* createIndividual(Individual* i1, Individual* i2, int point1, int point2);
+    static Individual* createIndividual(Individual* i1, Individual* i2, int point1, int point2);
 };
 
 

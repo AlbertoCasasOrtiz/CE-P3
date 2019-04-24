@@ -7,11 +7,6 @@
 #include "Timer.h"
 #include <chrono>
 
-Timer::Timer() {
-    this->start;
-    this->stop;
-}
-
 void Timer::tic() {
     this->start = clock();
 }

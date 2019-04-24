@@ -20,11 +20,6 @@ private:
     clock_t stop;
 public:
     /**
-     * Constructor for the class Timer.
-     */
-    Timer();
-
-    /**
      * Start counting time.
      */
     void tic();

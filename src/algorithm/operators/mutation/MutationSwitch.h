@@ -24,7 +24,7 @@ public:
      * Mutate an Individual.
      * @param ind Individual to be mutated.
      */
-    void mutateIndividual(Individual* ind);
+    static void mutateIndividual(Individual* ind);
 };
 
 

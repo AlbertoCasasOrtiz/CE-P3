@@ -16,7 +16,6 @@ std::string ExpressionGrammar::getExpression() {
     }else{
         return str;
     }
-    return this->chromosomeProcessor->endByWrap() ? "" : str;
 }
 
 std::string ExpressionGrammar::expr() {
@@ -41,7 +40,7 @@ std::string ExpressionGrammar::expr() {
             this->chromosomeProcessor->consumeCodon();
             return this->sign()+this->real()+this->ks()+this->expr();
         default:
-            //TODO ERROR
+            //Unreachable
             return "";
     }
 }
@@ -68,7 +67,7 @@ std::string ExpressionGrammar::sign() {
             this->chromosomeProcessor->consumeCodon();
             return "-";
     }
-    //TODO Error
+    //Unreachable
     return "";
 }
 

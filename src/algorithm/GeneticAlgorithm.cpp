@@ -55,7 +55,7 @@ void GeneticAlgorithm::execute() {
             }
         }
         this->timer->tac();
-        ExecutionData* data = new ExecutionData();
+        auto* data = new ExecutionData();
         data->setPopulation(this->population->copy());
         data->setGenerations(GeneticAlgorithm::currentGenerations);
         data->setTime(this->timer->getTime());
@@ -82,7 +82,6 @@ IndividualSet* GeneticAlgorithm::selectElite() {
                     //Keep consistency of elite set.
                     newElite->consistency();
                 } else {
-                    //TODO ERROR INDIVIDUAL NOT FOUND
                     std::cerr << "Error: Individual not found." << std::endl;
                 }
             }
