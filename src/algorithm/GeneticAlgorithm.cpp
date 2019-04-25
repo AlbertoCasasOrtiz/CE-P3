@@ -6,7 +6,7 @@
 #include "configuration/Configuration.h"
 #include "qualitymeasures/QualityMeasures.h"
 #include "problem/functions/Functions.h"
-#include "data/out/WriteResultsInFile.h"
+#include "data/writefile/WriteResultsInFile.h"
 #include <algorithm>
 #include <iostream>
 
@@ -25,8 +25,8 @@ GeneticAlgorithm::GeneticAlgorithm() {
 void GeneticAlgorithm::execute() {
     IndividualSet *parents;
     IndividualSet *offspring;
-    this->timer->tic();
     for(int i = 0; i < Configuration::numExecutions; i++){
+        this->timer->tic();
         GeneticAlgorithm::currentGenerations = 0;
         GeneticAlgorithm::evaluations = 0;
         this->population->clear();
@@ -65,8 +65,6 @@ void GeneticAlgorithm::execute() {
         data->setName("Execution_" + std::to_string(i));
         dataSet->addData(data);
         WriteResultsInFile::writeResults(data);
-        delete data;
-
     }
 }
 
