@@ -29,7 +29,8 @@ void GeneticAlgorithm::execute() {
         this->timer->tic();
         GeneticAlgorithm::currentGenerations = 0;
         GeneticAlgorithm::evaluations = 0;
-        this->population->clear();
+        delete this->population;
+        this->population = new IndividualSet();
         this->population->initialize();
         while(GeneticAlgorithm::currentGenerations < Configuration::maxNumGenerations){
             this->elite = this->selectElite();
@@ -65,6 +66,9 @@ void GeneticAlgorithm::execute() {
         dataSet->addData(data);
         WriteResultsInFile::writeResults(data);
     }
+    delete this->population;
+    delete this->timer;
+    delete this->dataSet;
 }
 
 IndividualSet* GeneticAlgorithm::selectElite() {
@@ -79,6 +83,7 @@ IndividualSet* GeneticAlgorithm::selectElite() {
                 auto it = std::find(newElite->getSet()->begin(), newElite->getSet()->end(), newElite->getWorstIndividual());
                 if(it != newElite->getSet()->end()){
                     int index = std::distance(newElite->getSet()->begin(), it);
+                    delete (*newElite->getSet())[index];
                     (*newElite->getSet())[index] = ind->copy();
                     //Keep consistency of elite set.
                     newElite->consistency();
@@ -104,10 +109,4 @@ void GeneticAlgorithm::addEliteToPopulation() {
             }
         }
     }
-}
-
-GeneticAlgorithm::~GeneticAlgorithm() {
-    delete this->population;
-    delete this->timer;
-    delete this->dataSet;
 }

@@ -10,11 +10,6 @@ int main() {
 
     delete algorithm;
     delete Configuration::x;
-    delete Configuration::problem;
-    delete Configuration::selectionParents;
-    delete Configuration::reproduction;
-    delete Configuration::mutation;
-    delete Configuration::selectionSurvivors;
 
 /*
     Tests tests = Tests();

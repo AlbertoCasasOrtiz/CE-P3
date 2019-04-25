@@ -38,7 +38,7 @@ public:
     /**
      * Destructor for class GeneticAlgorithm.
      */
-    ~GeneticAlgorithm();
+    ~GeneticAlgorithm() = default;
 
     /**
      * Function which executes the algorithm.
