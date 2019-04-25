@@ -64,11 +64,13 @@ void WriteResultsInFile::writeResults(ExecutionData *data) {
     std::ofstream file_csv;
     file_csv.open(data->getName() + ".csv");
 
+    std::vector<double> *expected = Functions::executeFunction(Configuration::function);
+    std::vector<double> *result = data->getPopulation()->getBestIndividual()->getFenotype();
     file_csv << "x" << ";" << "Expected" << ";" << "Result" << std::endl;
     for(int i = 0; i < Configuration::x->size(); i++){
         file_csv << Configuration::x->at(i) << ";"
-             << Functions::executeFunction(Configuration::function)->at(i) << ";"
-             << data->getPopulation()->getBestIndividual()->getFenotype()->at(i) << std::endl;
+             << expected->at(i) << ";"
+             << result->at(i) << std::endl;
     }
     file_csv << std::endl;
 
