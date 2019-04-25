@@ -48,13 +48,11 @@ void GeneticAlgorithm::execute() {
             this->population->increaseAge();
             GeneticAlgorithm::currentGenerations++;
 
-            /*std::cout << this->population->getBestIndividual()->getFitness() << std::endl;
-            std::cout << this->population->getBestIndividual()->getExpression() << std::endl;
-            std::cout << std::endl;*/
             if(GeneticAlgorithm::currentGenerations % 50 == 0) {
                 std::cout << (100*GeneticAlgorithm::currentGenerations)/Configuration::maxNumGenerations << "%" << std::endl;
             }
         }
+
         this->timer->tac();
         auto* data = new ExecutionData();
         data->setPopulation(this->population->copy());
@@ -64,8 +62,8 @@ void GeneticAlgorithm::execute() {
         data->setEvaluations(GeneticAlgorithm::evaluations);
         data->setHits(QualityMeasures::numHits(data));
         data->setSuccessRate(QualityMeasures::successRate(data));
-        //std::cout << data->toString() << std::endl;
-        //dataSet->addData(data);
+        data->setName("Execution_" + std::to_string(i));
+        dataSet->addData(data);
         WriteResultsInFile::writeResults(data);
         delete data;
 

@@ -27,6 +27,8 @@ private:
     int hits;
     /** Success rate in the execution. */
     double successRate;
+    /** Name of the execution. */
+    std::string name;
 public:
     /**
      * Constructor for class Data.
@@ -75,6 +77,12 @@ public:
     void setSuccessRate(double value);
 
     /**
+     * Set the name of the execution.
+     * @param name Name of the execution.
+     */
+    void setName(std::string value);
+
+    /**
      * Get population in the last generation of the execution.
      * @return IndividualSet containing population in the last generation of the execution.
      */
@@ -109,6 +117,12 @@ public:
      * @return Success rate of the best solution of the algorithm.
      */
     double getSuccessRate();
+
+    /**
+     * Get name of the execution.
+     * @return Name of the execution.
+     */
+    std::string getName();
 
     /**
      * Get representation of the execution as string,

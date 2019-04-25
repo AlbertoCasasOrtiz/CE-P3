@@ -41,6 +41,10 @@ void ExecutionData::setSuccessRate(double value) {
     this->successRate = value;
 }
 
+void ExecutionData::setName(std::string value) {
+    this->name = value;
+}
+
 IndividualSet *ExecutionData::getPopulation() {
     return this->population;
 }
@@ -63,6 +67,10 @@ int ExecutionData::getHits() {
 
 double ExecutionData::getSuccessRate() {
     return this->successRate;
+}
+
+std::string ExecutionData::getName() {
+    return this->name;
 }
 
 std::string ExecutionData::toString() {
