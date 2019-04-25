@@ -14,7 +14,7 @@ int GeneticAlgorithm::evaluations;
 int GeneticAlgorithm::currentGenerations;
 
 GeneticAlgorithm::GeneticAlgorithm() {
-    this->population = new IndividualSet();
+    this->population = nullptr;
     GeneticAlgorithm::currentGenerations = 0;
     GeneticAlgorithm::evaluations = 0;
     this->elite = nullptr;
@@ -29,7 +29,6 @@ void GeneticAlgorithm::execute() {
         this->timer->tic();
         GeneticAlgorithm::currentGenerations = 0;
         GeneticAlgorithm::evaluations = 0;
-        delete this->population;
         this->population = new IndividualSet();
         this->population->initialize();
         while(GeneticAlgorithm::currentGenerations < Configuration::maxNumGenerations){
@@ -65,8 +64,8 @@ void GeneticAlgorithm::execute() {
         data->setName("Execution_" + std::to_string(i));
         dataSet->addData(data);
         WriteResultsInFile::writeResults(data);
+        delete this->population;
     }
-    delete this->population;
     delete this->timer;
     delete this->dataSet;
 }
