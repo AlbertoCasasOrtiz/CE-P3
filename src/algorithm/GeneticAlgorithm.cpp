@@ -17,7 +17,7 @@ GeneticAlgorithm::GeneticAlgorithm() {
     this->population = new IndividualSet();
     GeneticAlgorithm::currentGenerations = 0;
     GeneticAlgorithm::evaluations = 0;
-    this->elite = new IndividualSet();
+    this->elite = nullptr;
     this->timer = new Timer();
     this->dataSet = new DataSet();
 }
@@ -31,9 +31,7 @@ void GeneticAlgorithm::execute() {
         GeneticAlgorithm::evaluations = 0;
         this->population->clear();
         this->population->initialize();
-        this->elite->clear();
         while(GeneticAlgorithm::currentGenerations < Configuration::maxNumGenerations){
-            delete this->elite;
             this->elite = this->selectElite();
             parents = Configuration::selectionParents->select(this->population);
             offspring = Configuration::reproduction->reproduce(parents);
@@ -51,6 +49,7 @@ void GeneticAlgorithm::execute() {
             if(GeneticAlgorithm::currentGenerations % 50 == 0) {
                 std::cout << (100*GeneticAlgorithm::currentGenerations)/Configuration::maxNumGenerations << "%" << std::endl;
             }
+            delete this->elite;
         }
 
         this->timer->tac();
@@ -109,7 +108,6 @@ void GeneticAlgorithm::addEliteToPopulation() {
 
 GeneticAlgorithm::~GeneticAlgorithm() {
     delete this->population;
-    delete this->elite;
     delete this->timer;
     delete this->dataSet;
 }
