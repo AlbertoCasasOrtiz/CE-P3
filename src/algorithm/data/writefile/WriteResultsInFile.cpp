@@ -72,6 +72,8 @@ void WriteResultsInFile::writeResults(ExecutionData *data) {
              << expected->at(i) << ";"
              << result->at(i) << std::endl;
     }
+    delete expected;
+    delete result;
     file_csv << std::endl;
 
     file_csv.close();
