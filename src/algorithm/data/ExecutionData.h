@@ -25,6 +25,8 @@ private:
     int evaluations;
     /** Number of hits achieved in the solution of the execution. */
     int hits;
+    /** Success rate in the execution. */
+    double successRate;
 public:
     /**
      * Constructor for class Data.
@@ -61,10 +63,16 @@ public:
     void setEvaluations(int value);
 
     /**
-     * Set number of hits achieved in the solution of th execution.
+     * Set number of hits achieved in the solution of the execution.
      * @param value Number of hits achieved in the solution of th execution.
      */
     void setHits(int value);
+
+    /**
+     * Set sucess ratoe of the solution of the execution.
+     * @param value
+     */
+    void setSuccessRate(double value);
 
     /**
      * Get population in the last generation of the execution.
@@ -95,6 +103,12 @@ public:
      * @return Number of hits achieved during the execution.
      */
     int getHits();
+
+    /**
+     * Get success rate of the best solution of the algorithm.
+     * @return Success rate of the best solution of the algorithm.
+     */
+    double getSuccessRate();
 
     /**
      * Get representation of the execution as string,

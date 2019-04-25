@@ -8,6 +8,8 @@
 #include <iostream>
 #include <fstream>
 
+std::string Configuration::executionName;
+std::string Configuration::problemName;
 Problem* Configuration::problem;
 int Configuration::numExecutions;
 int Configuration::populationSize;
@@ -21,11 +23,15 @@ int Configuration::samples;
 int Configuration::function;
 std::vector<double>* Configuration::x;
 int Configuration::maxChromosomeSize;
+std::string Configuration::nameSelectionParents;
 SelectionParents* Configuration::selectionParents;
+std::string Configuration::nameReproduction;
 Reproduction* Configuration::reproduction;
 double Configuration::pRep;
+std::string Configuration::nameMutation;
 Mutation* Configuration::mutation;
 double Configuration::pMut;
+std::string Configuration::nameSelectionSurvivors;
 SelectionSurvivors* Configuration::selectionSurvivors;
 bool Configuration::elitism;
 int Configuration::numElitism;
@@ -53,10 +59,13 @@ void Configuration::parseLine(const std::string& line, int nLine) {
     std::string delimiter = ": ";
     std::string key = line.substr(0, line.find(delimiter));
     std::string value = line.substr(line.find(delimiter)+delimiter.size(), line.size());
-    if(key == "number_executions"){
+    if(key == "name_execution") {
+        Configuration::executionName = value;
+    }else if(key == "number_executions"){
         Configuration::numExecutions = ConfigurationParsers::parseInt(value);
     }else if(key == "problem"){
         Configuration::problem = ConfigurationParsers::parseProblem(value);
+        Configuration::problemName = value;
     }else if(key == "population_size"){
         Configuration::populationSize = ConfigurationParsers::parseInt(value);
     }else if(key == "offspring_size"){
@@ -65,16 +74,20 @@ void Configuration::parseLine(const std::string& line, int nLine) {
         Configuration::maxNumGenerations = ConfigurationParsers::parseInt(value);
     }else if(key == "selection_parents"){
         Configuration::selectionParents = ConfigurationParsers::parseSelectionParents(value);
+        Configuration::nameSelectionParents = value;
     }else if(key == "reproduction"){
         Configuration::reproduction = ConfigurationParsers::parseReproduction(value);
+        Configuration::nameReproduction = value;
     }else if(key == "pRep"){
         Configuration::pRep = ConfigurationParsers::parseDouble(value);
     }else if(key == "mutation"){
         Configuration::mutation = ConfigurationParsers::parseMutation(value);
+        Configuration::nameMutation = value;
     }else if(key == "pMut"){
         Configuration::pMut = ConfigurationParsers::parseDouble(value);
     }else if(key == "selection_survivors"){
         Configuration::selectionSurvivors = ConfigurationParsers::parseSelectionSurvivors(value);
+        Configuration::nameSelectionSurvivors = value;
     }else if(key == "elitism"){
         Configuration::elitism = ConfigurationParsers::parseBoolean(value);
     }else if(key == "max_codon_size"){

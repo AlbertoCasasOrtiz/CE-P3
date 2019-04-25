@@ -17,6 +17,5 @@ void Timer::tac() {
 
 double Timer::getTime() {
     auto time = this->stop - this->start;
-    std::cout << time*1.0/CLOCKS_PER_SEC << std::endl;
     return (time * 1.0/ CLOCKS_PER_SEC);
 }

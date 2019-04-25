@@ -19,8 +19,12 @@
  */
 class Configuration {
 public:
+    /** Name of the execution. */
+    static std::string executionName;
     /** Problem to solve. */
     static Problem* problem;
+    /** Name of the problem. */
+    static std::string problemName;
     /** Number of executions of the algorithm. */
     static int numExecutions;
     /** Size of the population. */
@@ -47,14 +51,22 @@ public:
     static int maxChromosomeSize;
     /** Method of parents selection used. */
     static SelectionParents* selectionParents;
+    /** Name of selection parents. */
+    static std::string nameSelectionParents;
     /** Method of reproduction used. */
     static Reproduction* reproduction;
+    /** Name of reproduction. */
+    static std::string nameReproduction;
     /** Probability of apply the reprodution method over a pair of chromosomes. */
     static double pRep;
+    /** Name of mutation.*/
+    static std::string nameMutation;
     /** Method of mutation used. */
     static Mutation* mutation;
     /** Probability of apply mutation method over a codon. */
     static double pMut;
+    /** Name of selection survivors. */
+    static std::string nameSelectionSurvivors;
     /** Mehod of survivors selection. */
     static SelectionSurvivors* selectionSurvivors;
     /** Boolean that indicates if elitism is applied. */

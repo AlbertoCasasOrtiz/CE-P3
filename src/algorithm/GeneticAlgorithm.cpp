@@ -6,6 +6,7 @@
 #include "configuration/Configuration.h"
 #include "qualitymeasures/QualityMeasures.h"
 #include "problem/functions/Functions.h"
+#include "data/out/WriteResultsInFile.h"
 #include <algorithm>
 #include <iostream>
 
@@ -58,11 +59,16 @@ void GeneticAlgorithm::execute() {
         auto* data = new ExecutionData();
         data->setPopulation(this->population->copy());
         data->setGenerations(GeneticAlgorithm::currentGenerations);
+        data->setHits(QualityMeasures::numHits(data));
         data->setTime(this->timer->getTime());
         data->setEvaluations(GeneticAlgorithm::evaluations);
-        data->setHits(QualityMeasures::numHits(Functions::executeFunction(Configuration::function), this->population->getBestIndividual()->getFenotype()));
-        std::cout << data->toString() << std::endl;
-        dataSet->addData(data);
+        data->setHits(QualityMeasures::numHits(data));
+        data->setSuccessRate(QualityMeasures::successRate(data));
+        //std::cout << data->toString() << std::endl;
+        //dataSet->addData(data);
+        WriteResultsInFile::writeResults(data);
+        delete data;
+
     }
 }
 
